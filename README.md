@@ -8,5 +8,5 @@ Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by 
 
 #### Back End Developers
 - [Tanya Powell](https://github.com/tanyapowell)
-- [Tzhe'ela Cooper](https://github.com/MsToT)
-- [Yana](https://github.com/yanabar)
+- [Tzhe'ela Trooper](https://github.com/MsToT)
+- [Yana Bartzi](https://github.com/yanabar)
