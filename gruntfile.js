@@ -1,12 +1,12 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
-	grunt.initConfig({
+    grunt.initConfig({
 
-		pkg: require('./package.json'),
-		meta: {
-			banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-			'<%= grunt.template.today("yyyy-mm-dd") %> */'
-		},
+        pkg: require('./package.json'),
+        meta: {
+            banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+            '<%= grunt.template.today("yyyy-mm-dd") %> */'
+        },
 
         // Grunt clean will delete the contents of the dist/ directory before we start a new build
 
@@ -18,49 +18,49 @@ module.exports = function(grunt) {
         },
 
 
-		// Grunt will watch for file changes
+        // Grunt will watch for file changes
         // Sass files changed in the styles folder/sub-dir will call the ['sass'] task
         // Include pages changed will call the ['ssi'] task - Server Side Includes
 
-		watch: {
-			watch_sass: {
-				files: 'frontend/src/styles/**/*.scss',
-				tasks: ['sass:dev', 'postcss']
-			},
+        watch: {
+            watch_sass: {
+                files: 'frontend/src/styles/**/*.scss',
+                tasks: ['sass:dev', 'postcss']
+            },
             watch_ssi: {
                 files: 'frontend/src/pages/**/*.html',
                 tasks: ['ssi']
             },
             watch_js: {
-				files: ['frontend/src/scripts/**/*.js'],
-				tasks: ['uglify']
-			}
-		},
+                files: ['frontend/src/scripts/**/*.js'],
+                tasks: ['uglify']
+            }
+        },
 
-		// Grunt will pre-process sass files into css files from src to destination directory
+        // Grunt will pre-process sass files into css files from src to destination directory
 
-		sass: {
-			dev: {
-				files: {
-					//destination            //source file
-					'frontend/dist/styles/styles.css' : 'frontend/src/styles/main.scss'
-				}
-			},
+        sass: {
+            dev: {
+                files: {
+                    //destination            //source file
+                    'frontend/dist/styles/styles.css': 'frontend/src/styles/main.scss'
+                }
+            },
             deploy: {
                 options: {
                     style: 'compressed'
                 },
                 files: {
                     //destination          //source file
-                    'frontend/dist/styles/styles.css' : 'frontend/src/styles/main.scss'
+                    'frontend/dist/styles/styles.css': 'frontend/src/styles/main.scss'
                 }
             }
-		},
+        },
 
         // Grunt uses a type of serverside include for common page elements like header/footer/nav
         // https://github.com/jamesor/grunt-ssimin
 
-		ssi: {
+        ssi: {
             dev: {
                 options: {
                     // task-specific options
@@ -76,43 +76,43 @@ module.exports = function(grunt) {
                     dest: 'frontend/dist'      // destination path prefix
                 }]
             }
-		},
+        },
 
 
-		// Config for grunt-postcss (multiple css post processors, minification, autoprefixing)
+        // Config for grunt-postcss (multiple css post processors, minification, autoprefixing)
 
-		postcss: {
-			options: {
-				safe: true,
-				map: true,
-				processors: [
-					require('rucksack-css')({
-						fallbacks: true
-					}),
-					require('pixrem')(16, { // Value is the same as on _config.scss $fsz variable multiplied by 10.
-						html: true,
-						replace: false,
-						atrules: true,
-						browsers: ['last 3 versions', '> 2%', 'ie 8', 'ie 7']
-					}),
-					require('autoprefixer')({
-						browsers: ['last 3 versions', '> 2%', 'ie 8', 'ie 7']
-					})
-				]
-			},
-			main: {
-				src: 'frontend/dist/styles/styles.css'
-			}
-		},
+        postcss: {
+            options: {
+                safe: true,
+                map: true,
+                processors: [
+                    require('rucksack-css')({
+                        fallbacks: true
+                    }),
+                    require('pixrem')(16, { // Value is the same as on _config.scss $fsz variable multiplied by 10.
+                        html: true,
+                        replace: false,
+                        atrules: true,
+                        browsers: ['last 3 versions', '> 2%', 'ie 8', 'ie 7']
+                    }),
+                    require('autoprefixer')({
+                        browsers: ['last 3 versions', '> 2%', 'ie 8', 'ie 7']
+                    })
+                ]
+            },
+            main: {
+                src: 'frontend/dist/styles/styles.css'
+            }
+        },
 
         // concatenate javascript files for development
 
         concat: {
             options: {
-              separator: ';',
+                separator: ';',
             },
             dist: {
-              src: [
+                src: [
                     'frontend/src/scripts/vendors/jquery.js',
                     'frontend/src/scripts/vendors/fastclick.js',
                     'frontend/src/scripts/vendors/jquery.cookie.js',
@@ -120,24 +120,24 @@ module.exports = function(grunt) {
                     'frontend/src/scripts/vendors/jquery.easing.js',
                     'frontend/src/scripts/vendors/foundation.js',
                     'frontend/src/scripts/scripts.js'
-              ],
-              dest: 'frontend/dist/scripts/scripts.js',
+                ],
+                dest: 'frontend/dist/scripts/scripts.js',
             },
-      },
+        },
 
-		// compress javascript files for deployment
+        // compress javascript files for deployment
 
-		uglify: {
-			options: {
-				beautify: false,
-				sourceMap: true,
-				sourceMapIncludeSources: true,
+        uglify: {
+            options: {
+                beautify: false,
+                sourceMap: true,
+                sourceMapIncludeSources: true,
                 sourceMapName: 'frontend/dist/scripts/scripts.map'
-			},
-			main: {
-				files: {
+            },
+            main: {
+                files: {
                     'frontend/dist/scripts/scripts.js': [
-						// 'scripts/**/*.js'
+                        // 'scripts/**/*.js'
                         'frontend/src/scripts/vendors/jquery.js',
                         'frontend/src/scripts/vendors/fastclick.js',
                         'frontend/src/scripts/vendors/jquery.cookie.js',
@@ -145,51 +145,51 @@ module.exports = function(grunt) {
                         'frontend/src/scripts/vendors/jquery.easing.js',
                         'frontend/src/scripts/vendors/foundation.js',
                         'frontend/src/scripts/scripts.js'
-					]
-				}
-			}
-		},
+                    ]
+                }
+            }
+        },
 
 
-		// Browsersync live reloads the page you are working on across all browsers across all devices
+        // Browsersync live reloads the page you are working on across all browsers across all devices
         // Browsersync can watch your files as you work. Changes you make will either be injected into the page
         // (CSS & images) or will cause all browsers to do a full-page refresh.
 
-		browserSync: {
-			default_options: {
-				bsFiles: {
-					src: [
-						'frontend/dist/styles/*.css',
-						'frontend/dist/*.html',
+        browserSync: {
+            default_options: {
+                bsFiles: {
+                    src: [
+                        'frontend/dist/styles/*.css',
+                        'frontend/dist/*.html',
                         'frontend/dist/scripts/*.js'
-					]
-				},
-				options: {
-					watchTask: true,
-					server: {
-						baseDir: 'frontend/dist'
-					}
-				}
-			}
-		},
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    server: {
+                        baseDir: 'frontend/dist'
+                    }
+                }
+            }
+        },
 
 
         // Minify images in production
 
-         imagemin: {
-              dist: {
+        imagemin: {
+            dist: {
                 options: {
-                  optimizationLevel: 3
+                    optimizationLevel: 3
                 },
                 files: [
-                  {
-                    expand: true,
-                    cwd: 'frontend/src/img/',
-                    src: ['*.{png,jpg,gif}'],
-                    dest: 'frontend/dist/img'
-                  }
+                    {
+                        expand: true,
+                        cwd: 'frontend/src/img/',
+                        src: ['*.{png,jpg,gif}'],
+                        dest: 'frontend/dist/img'
+                    }
                 ]
-              }
+            }
         },
 
 
@@ -204,27 +204,27 @@ module.exports = function(grunt) {
                 base: 'frontend/dist'
             },
             src: ['**']
-          },
+        },
 
-          // TODO - add src file path
-          jshint: {
+        // TODO - add src file path
+        jshint: {
             all: ['']
-          },
-          mocha_istanbul: {
-              target: {
-                  src: 'tests'
-              }
-          },
-					coveralls: {
-    				options: {
-      				src: 'coverage/lcov.info',
-      				force: false
-    			},
-		    	your_target: {
- 		      	src: 'coverage/extra-results-*.info'
-		    	},
-  },
-	});
+        },
+        mocha_istanbul: {
+            target: {
+                src: 'tests'
+            }
+        },
+        coveralls: {
+            options: {
+                src: 'coverage/lcov.info',
+                force: false
+            },
+            your_target: {
+                src: 'coverage/extra-results-*.info'
+            },
+        },
+    });
 
     // Dependent plug-ins
 
@@ -240,10 +240,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha-istanbul');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-		grunt.loadNpmTasks('grunt-coveralls');
+    grunt.loadNpmTasks('grunt-coveralls');
 
     // include call to sass/ssi separately for first time run thereafter called via watch
-	  grunt.registerTask('default', ['sass:dev', 'ssi', 'postcss', 'concat', 'imagemin', 'browserSync', 'watch']);
+    grunt.registerTask('default', ['sass:dev', 'ssi', 'postcss', 'concat', 'imagemin', 'browserSync', 'watch']);
     // run grunt deploy for a distribution ready product
     grunt.registerTask('deploy', ['clean', 'sass:deploy', 'ssi', 'postcss', 'uglify', 'imagemin', 'gh-pages']);
     grunt.registerTask('backend', ['jshint', 'mocha_istanbul']);
