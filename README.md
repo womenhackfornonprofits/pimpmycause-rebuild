@@ -1,8 +1,13 @@
+[![Build Status](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild.svg?branch=master)](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild)
+[![Coverage Status](https://coveralls.io/repos/github/womenhackfornonprofits/pimpmycause-rebuild/badge.svg?branch=master)](https://coveralls.io/github/womenhackfornonprofits/pimpmycause-rebuild?branch=master)
+
 # Pimp My Cause
 Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by [Women Hack For Non Profits](womenhackfornonprofits.com)
 
-## Continuous Integration 
-All builds are performed by [Travis CI](travis-ci.org) and can found [here](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild/)
+To get started you must install all dependencies by running `npm install` in the command line.
+
+## Continuous Integration, Code Coverage and Unit Tests
+All builds are performed by [Travis-CI](travis-ci.org) and can found [here](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild/). To view details of our code coverage visit [Coveralls.io](https://coveralls.io/github/womenhackfornonprofits/pimpmycause-rebuild) and we are using [Mocha](https://mochajs.org) as our testing framework. 
 
 ## The Team
 #### Front End Developers
@@ -16,6 +21,6 @@ All builds are performed by [Travis CI](travis-ci.org) and can found [here](http
 
 
 Notes:
-Please review [PencilBlue repo](https://github.com/pencilblue/pencilblue) on github for sourcecode updates and to [PencilBlue APIs](http://pencilblue.github.io/) for documentations.
+Please review the [PencilBlue repo](https://github.com/pencilblue/pencilblue) for source code updates and [PencilBlue APIs](http://pencilblue.github.io/) for documentations.
 
-For latest updates and FAQ, please visit [PencilBlue Gitter](https://gitter.im/pencilblue/pencilblue)
+For latest updates and FAQ, please visit the [PencilBlue Gitter](https://gitter.im/pencilblue/pencilblue)

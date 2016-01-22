@@ -1,0 +1,49 @@
+{
+  "name": "pimpmycause-rebuild",
+  "version": "1.0.0",
+  "contributors": [
+    {
+      "name": "Liliana Kastilio"
+    },
+    {
+      "name": "Tanya Powell"
+    },
+    {
+      "name": "Rhonda Impey"
+    },
+    {
+      "name": "Tzhe'ela Trooper"
+    },
+    {
+      "name": "Yana Bartzi"
+    }
+  ],
+  "description": "rebuild and modernisation of pimp my cause website",
+  "keywords": [
+    "cms",
+    "website",
+    "platform"
+  ],
+  "main": "gruntfile.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha ./tests/*",
+    "coverage": "istanbul cover node_modules/.bin/_mocha",
+    "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/womenhackfornonprofits/pimpmycause-rebuild.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/womenhackfornonprofits/pimpmycause-rebuild/issues"
+  },
+  "homepage": "https://github.com/womenhackfornonprofits/pimpmycause-rebuild#readme",
+  "devDependencies": {
+    "coveralls": "^2.11.6",
+    "grunt-contrib-jshint": "^0.12.0",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.3.4"
+  }
+}
