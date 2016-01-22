@@ -208,13 +208,22 @@ module.exports = function(grunt) {
 
           // TODO - add src file path
           jshint: {
-            all: ['', '']
+            all: ['']
           },
           mocha_istanbul: {
               target: {
                   src: 'tests'
               }
-          }
+          },
+					coveralls: {
+    				options: {
+      				src: 'coverage/lcov.info',
+      				force: false
+    			},
+		    	your_target: {
+ 		      	src: 'coverage/extra-results-*.info'
+		    	},
+  },
 	});
 
     // Dependent plug-ins
@@ -231,6 +240,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-gh-pages');
     grunt.loadNpmTasks('grunt-mocha-istanbul');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+		grunt.loadNpmTasks('grunt-coveralls');
 
     // include call to sass/ssi separately for first time run thereafter called via watch
 	  grunt.registerTask('default', ['sass:dev', 'ssi', 'postcss', 'concat', 'imagemin', 'browserSync', 'watch']);
