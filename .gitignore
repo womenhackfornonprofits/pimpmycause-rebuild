@@ -28,3 +28,13 @@ Temporary Items
 **/node_modules
 **/node_modules/**
 **/coverage/**
+
+### FRONTEND ###
+.sass-cache/
+.ssi-cache/
+
+### DIST ###
+frontend/dist/
+
+### GH-PAGES TMP FILE ###
+.grunt
