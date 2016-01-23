@@ -246,6 +246,6 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['sass:dev', 'ssi', 'postcss', 'concat', 'imagemin', 'browserSync', 'watch']);
     // run grunt deploy for a distribution ready product
     grunt.registerTask('deploy', ['clean', 'sass:deploy', 'ssi', 'postcss', 'uglify', 'imagemin', 'gh-pages']);
-    grunt.registerTask('backend', ['jshint', 'mocha_istanbul']);
+    grunt.registerTask('backend', ['mocha_istanbul']);
 
 };

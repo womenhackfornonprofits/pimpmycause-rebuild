@@ -6,6 +6,9 @@ before_script:
 after_script:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - rm -rf ./coverage
+addons:
+    code_climate:
+        repo_token: d0d038bf23febf6f7767039ecd7283f467259f8b3a0a21f71e3bb564b578e7bc
 # TODO - add Mocha Unit Test to before scripts
 
 # TODO - add deployment to Heroku
