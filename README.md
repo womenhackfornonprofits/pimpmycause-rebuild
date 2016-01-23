@@ -17,7 +17,7 @@ To run the project on your local machine - `pbctrl start` to start the PencilBlu
 | MongoDB       | CSS               |  
 
 ## Continuous Integration, Code Coverage and Unit Tests
-All builds are performed by [Travis-CI](travis-ci.org) and can found [here](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild/). To view details of our code coverage visit [Coveralls.io](https://coveralls.io/github/womenhackfornonprofits/pimpmycause-rebuild) and we are using [Mocha](https://mochajs.org) as our testing framework.
+All builds are performed by [Travis-CI](travis-ci.org) and can found [here](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild/). To view details of our code coverage visit [Code Climate](https://codeclimate.com/github/womenhackfornonprofits/pimpmycause-rebuild) and we are using [Mocha](https://mochajs.org) as our testing framework.
 
 ## The Team
 #### Front End Developers
