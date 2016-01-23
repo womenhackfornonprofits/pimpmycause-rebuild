@@ -6,7 +6,7 @@
 Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by [Women Hack For Non Profits](womenhackfornonprofits.com)
 
 To get started you must install all dependencies by running `npm install` and `bower install` in the command line.
-You will also need to install the PencilBlue command line interface tools `npm install -g pencilblue-cli`
+You will also need to install the PencilBlue command line interface tools `npm install -g pencilblue-cli`. For more information about installing PencilBlue please visit the [wiki](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation).
 
 To run the project on your local machine - `pbctrl start` to start the PencilBlue CMS and you will be able to view in your browser [`http://localhost:8080/`](http://localhost:8080/)
 

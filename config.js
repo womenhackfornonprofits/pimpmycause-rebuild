@@ -1,6 +1,6 @@
 module.exports = {
     "siteName": "Pimp My Cause",
-    "siteRoot": "http://localhost:8080",
+    "siteRoot": "http://pimpmycause-dev.herokuapp.com/",
     "sitePort": 8080,
     "logging": {
         "level": "info"
@@ -8,10 +8,13 @@ module.exports = {
     "db": {
         "type": "mongo",
         "servers": [
-            "mongodb://127.0.0.1:27017/"
+            "mongodb://ds041934.mongolab.com:41934/pimpmycausedb"
         ],
-        "name": "pimpmycause",
-        "writeConcern": 1
+        "name": "pimpmycausedb",
+        "authentication": {
+            "un": "pmpuser",
+            "pw": "Saturday23!",
+        },
     },
     "cache": {
         "fake": true,
