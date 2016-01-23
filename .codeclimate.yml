@@ -8,3 +8,5 @@ ratings:
 
 exclude_paths:
    - "tests/**/*"
+   - "frontend/src/scripts/*"
+   - "frontend/src/scripts/vendors/*"
