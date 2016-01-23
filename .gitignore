@@ -6,7 +6,6 @@
 # Icon must end with two \r
 Icon
 
-
 # Thumbnails
 ._*
 
@@ -25,9 +24,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-**/node_modules
-**/node_modules/**
-**/coverage/**
+/node_modules
+/node_modules/**
+/coverage/**
 
 ### FRONTEND ###
 .sass-cache/
@@ -44,3 +43,4 @@ nodemon.json
 /.idea
 
 /log
+/*.log
