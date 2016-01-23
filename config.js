@@ -1,7 +1,7 @@
 module.exports = {
     "siteName": "Pimp My Cause",
     "siteRoot": "http://pimpmycause-dev.herokuapp.com/",
-    "sitePort": 8080,
+    "siteIP": "0.0.0.0",
     "logging": {
         "level": "info"
     },
@@ -15,6 +15,7 @@ module.exports = {
             "un": "pmpuser",
             "pw": "Saturday23!",
         },
+        "writeConcern": 1,
     },
     "cache": {
         "fake": true,
