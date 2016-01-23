@@ -40,3 +40,7 @@ frontend/dist/
 .grunt
 
 nodemon.json
+
+/.idea
+
+/log
