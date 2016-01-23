@@ -1,28 +1,33 @@
 {
   "uid": "pimpmycause",
   "name": "Pimp My Cause",
-  "description": "The plugin that drives the default core functionality of Pimp My Cause",
+  "description": "The main theme/plugin for the Pimp My Cause website, including all core functionality",
   "version": "0.1.0",
   "icon": "",
   "author": {
-    "name": "Pimp My Cause",
+    "name": "Women Hack for Non-Profits",
     "email": "help@womenhackfornonprofits.com",
     "website": "http://www.pimpmycause.org",
     "contributors": [
       {
-        "name": "Liliana Kastilio"
+        "name": "Liliana Kastilio",
+        "email": ""
       },
       {
-        "name": "Tanya Powell"
+        "name": "Tanya Powell",
+        "email": ""
       },
       {
-        "name": "Rhonda Impey"
+        "name": "Rhonda Impey",
+        "email": ""
       },
       {
-        "name": "Tzhe'ela Trooper"
+        "name": "Tzhe'ela Trooper",
+        "email": ""
       },
       {
-        "name": "Yana Bartzi"
+        "name": "Yana Bartzi",
+        "email": ""
       }
     ]
   },
@@ -38,11 +43,6 @@
   },
   "theme": {
     "settings": [],
-    "content_templates": [
-      {
-        "file": "index",
-        "name": "Default"
-      }
-    ]
+    "content_templates": []
   }
 }
