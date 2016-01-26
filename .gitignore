@@ -38,3 +38,5 @@ frontend/dist/
 
 ### GH-PAGES TMP FILE ###
 .grunt
+
+nodemon.json

@@ -1,0 +1,12 @@
+engines:
+  eslint:
+    enabled: true
+
+ratings:
+   paths:
+   - "**.js"
+
+exclude_paths:
+   - "tests/**/*"
+   - "frontend/src/scripts/*"
+   - "frontend/src/scripts/vendors/*"
