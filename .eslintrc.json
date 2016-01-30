@@ -1,7 +1,7 @@
 {
     "rules": {
         "indent": [
-            2,
+            4,
             "tab"
         ],
         "quotes": [
