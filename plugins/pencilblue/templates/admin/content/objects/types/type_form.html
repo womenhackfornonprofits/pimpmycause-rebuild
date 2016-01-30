@@ -10,9 +10,12 @@
                     <div class="form-group" ng-class="{'has-error': !isFieldValid(typeForm.name)}">
                         <label>^loc_NAME^</label>
                         <div class="input-group">
-                            <input type="text" name="name" class="form-control" ng-model="objectType.name" ng-change="resetAvailability()" required></input>
+                            <input type="text" name="name" class="form-control" ng-model="objectType.name"
+                                   ng-change="resetAvailability()" required></input>
                             <span class="input-group-btn">
-                                <button type="button" class="btn" ng-class="{'btn-default': nameAvailable === null, 'btn-success': nameAvailable === true, 'btn-danger': nameAvailable === false}" ng-click="getAvailability()" ng-disabled="!objectType.name.length">
+                                <button type="button" class="btn"
+                                        ng-class="{'btn-default': nameAvailable === null, 'btn-success': nameAvailable === true, 'btn-danger': nameAvailable === false}"
+                                        ng-click="getAvailability()" ng-disabled="!objectType.name.length">
                                     <span ng-if="nameAvailable === null">^loc_CHECK^</span>
                                     <span ng-if="nameAvailable === true"><i class="fa fa-check"></i>&nbsp;^loc_AVAILABLE^</span>
                                     <span ng-if="nameAvailable === false"><i class="fa fa-ban"></i>&nbsp;^loc_UNAVAILABLE^</span>
@@ -22,8 +25,10 @@
                         <div class="form_error" ng-if="!isFieldValid(typeForm.name)">^loc_REQUIRED_FIELD^</div>
                     </div>
                 </div>
-                <div class="tab-pane" id="object_fields" ng-model="objectType.fields" data-as-sortable="board.dragControlListeners" is-enabled="true">
-                    <div class="form-group" ng-repeat="field in objectType.fields" style="border: none" data-as-sortable-item>
+                <div class="tab-pane" id="object_fields" ng-model="objectType.fields"
+                     data-as-sortable="board.dragControlListeners" is-enabled="true">
+                    <div class="form-group" ng-repeat="field in objectType.fields" style="border: none"
+                         data-as-sortable-item>
                         <label>
                             <span ng-if="field.field_type === 'text' || field.field_type === 'number'">^loc_VALUE^</span>
                             <span ng-if="field.field_type === 'wysiwyg'">^loc_WYSIWYG^</span>
@@ -33,15 +38,20 @@
                             <span ng-if="field.field_type === 'child_objects'">^loc_CHILD_OBJECTS^</span>
                         </label>
                         <div class="input-group">
-                            <span class="input-group-addon" data-as-sortable-item-handle><i class="fa fa-bars"></i></span>
-                            <input type="text" name="field_{{$index}}" class="form-control" ng-model="field.name" placeholder="^loc_NAME^"></input>
-                            <div class="input-group-btn" ng-if="field.field_type !== 'date' && field.field_type !== 'boolean' && field.field_type !== 'wysiwyg'">
+                            <span class="input-group-addon" data-as-sortable-item-handle><i
+                                    class="fa fa-bars"></i></span>
+                            <input type="text" name="field_{{$index}}" class="form-control" ng-model="field.name"
+                                   placeholder="^loc_NAME^"></input>
+                            <div class="input-group-btn"
+                                 ng-if="field.field_type !== 'date' && field.field_type !== 'boolean' && field.field_type !== 'wysiwyg'">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span ng-bind="field.object_type || field.field_type"></span>&nbsp;<span class="caret"></span>
+                                    <span ng-bind="field.object_type || field.field_type"></span>&nbsp;<span
+                                        class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu pull-right">
                                     <li ng-repeat="availableFieldType in getAvailableFieldTypes(field.field_type)">
-                                        <a href="#" ng-click="setFieldType(field, availableFieldType)" ng-bind="availableFieldType"></a>
+                                        <a href="#" ng-click="setFieldType(field, availableFieldType)"
+                                           ng-bind="availableFieldType"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -66,10 +76,12 @@
                         <button type="button" class="btn btn-success add_field_button" ng-click="addField('date')">
                             <i class="fa fa-calendar"></i>&nbsp;^loc_DATE^
                         </button>
-                        <button type="button" class="btn btn-success add_field_button" ng-click="addField('peer_object')">
+                        <button type="button" class="btn btn-success add_field_button"
+                                ng-click="addField('peer_object')">
                             <i class="fa fa-link"></i>&nbsp;^loc_PEER_OBJECT^
                         </button>
-                        <button type="button" class="btn btn-success add_field_button" ng-click="addField('child_objects')">
+                        <button type="button" class="btn btn-success add_field_button"
+                                ng-click="addField('child_objects')">
                             <i class="fa fa-sitemap"></i>&nbsp;^loc_CHILD_OBJECTS^
                         </button>
                     </div>

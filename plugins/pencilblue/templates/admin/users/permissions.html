@@ -11,7 +11,9 @@
         <table id="permissions_table" class="table table-responsive table-condensed">
             <tr>
                 <th id="permission_name_header">^loc_NAME^</th>
-                <th ng-repeat="role in roles"><div ng-class-odd="'odd'"><span ng-bind="role"></span></div></th>
+                <th ng-repeat="role in roles">
+                    <div ng-class-odd="'odd'"><span ng-bind="role"></span></div>
+                </th>
             </tr>
             <tr class="permission_row" ng-repeat="perm in permissions" ng-if="!perm.hidden && !perm.paginated">
                 <td class="permission_name" class="project-name" ng-bind="perm.name"></td>

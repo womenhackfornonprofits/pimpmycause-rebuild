@@ -5,16 +5,20 @@
     ^tmp_admin=elements=tab_nav^
     <div class="tab-content">
         <div class="tab-pane active" id="themes">
-		    <form>
-		        <div class="form-group">
+            <form>
+                <div class="form-group">
                     <div class="input-group">
-    		            <select class="form-control" ng-model="activeTheme" ng-options="t.uid as t.name for t in options"></select>
+                        <select class="form-control" ng-model="activeTheme"
+                                ng-options="t.uid as t.name for t in options"></select>
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="pluginAction('set_theme', activeTheme)"><i class="fa fa-check-square-o"></i>&nbsp;^loc_SET_THEME^</button>
+                            <button type="button" class="btn btn-default"
+                                    ng-click="pluginAction('set_theme', activeTheme)"><i
+                                    class="fa fa-check-square-o"></i>&nbsp;^loc_SET_THEME^
+                            </button>
                         </span>
                     </div>
-		        </div>
-		    </form>
+                </div>
+            </form>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     ^loc_THEMES^
@@ -29,14 +33,19 @@
                             <th></th>
                         </tr>
                         <tr class="theme_row" ng-repeat="t in themes track by t.uid" on-finish-render ng-cloak>
-                            <td><a ng-href="/admin/plugins/{{t.uid}}" title="{{t.description}}" ng-bind="t.uid"></a></td>
+                            <td><a ng-href="/admin/plugins/{{t.uid}}" title="{{t.description}}" ng-bind="t.uid"></a>
+                            </td>
                             <td ng-bind="t.version"></td>
                             <td ng-bind="t.created | date: 'yyyy-MM-dd HH:mm'"></td>
                             <td><i class="fa fa-check" ng-if="t.uid === activeTheme"></i></td>
                             <td style="text-align: right">
                                 <div class="btn-group">
-                                    <a class="btn btn-sm btn-default" href="/admin/themes/{{t.uid}}/settings"><i class="fa fa-cog"></i>&nbsp;^loc_SETTINGS^</a>
-                                    <button type="button" class="btn btn-sm btn-default" ng-click="pluginAction('reset_settings', t.uid)"><i class="fa fa-fw fa-refresh"></i>&nbsp;^loc_RESET_SETTINGS^</button>
+                                    <a class="btn btn-sm btn-default" href="/admin/themes/{{t.uid}}/settings"><i
+                                            class="fa fa-cog"></i>&nbsp;^loc_SETTINGS^</a>
+                                    <button type="button" class="btn btn-sm btn-default"
+                                            ng-click="pluginAction('reset_settings', t.uid)"><i
+                                            class="fa fa-fw fa-refresh"></i>&nbsp;^loc_RESET_SETTINGS^
+                                    </button>
                                 </div>
                             </td>
                         </tr>

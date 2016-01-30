@@ -1,130 +1,132 @@
 /*
-    Copyright (C) 2015  PencilBlue, LLC
+ Copyright (C) 2015  PencilBlue, LLC
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 //dependencies
 var async = require('async');
 
-module.exports = function(pb) {
-    
-    //pb dependencies
-    var util = pb.util;
-    
-    /**
-     * Interface for creating and editing custom object types
-     */
-    function TypeForm(){}
-    util.inherits(TypeForm, pb.BaseController);
+module.exports = function (pb) {
 
-    //statics
-    var SUB_NAV_KEY = 'type_form';
+	//pb dependencies
+	var util = pb.util;
 
-    TypeForm.prototype.render = function(cb) {
-        var self = this;
-        var vars = this.pathVars;
+	/**
+	 * Interface for creating and editing custom object types
+	 */
+	function TypeForm() {
+	}
 
-        this.gatherData(vars, function(err, data) {
-            if (util.isError(err)) {
-                throw err;
-            }
-            else if(!data.objectType) {
-                self.reqHandler.serve404();
-                return;
-            }
+	util.inherits(TypeForm, pb.BaseController);
 
-            self.objectType = data.objectType;
-            data.pills = pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls, SUB_NAV_KEY, self.objectType);
-            var angularObjects = pb.ClientJs.getAngularObjects(data);
+	//statics
+	var SUB_NAV_KEY = 'type_form';
 
-            self.setPageName(self.objectType[pb.DAO.getIdField()] ? self.objectType.name : self.ls.get('NEW_OBJECT'));
-            self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
-            self.ts.load('admin/content/objects/types/type_form', function(err, result) {
-                cb({content: result});
-            });
-        });
-    };
+	TypeForm.prototype.render = function (cb) {
+		var self = this;
+		var vars = this.pathVars;
 
-    TypeForm.prototype.gatherData = function(vars, cb) {
-        var self = this;
-        var cos = new pb.CustomObjectService();
+		this.gatherData(vars, function (err, data) {
+			if (util.isError(err)) {
+				throw err;
+			}
+			else if (!data.objectType) {
+				self.reqHandler.serve404();
+				return;
+			}
 
-        var tasks = {
-            tabs: function(callback) {
-                var tabs = [
-                    {
-                        active: 'active',
-                        href: '#object_settings',
-                        icon: 'cog',
-                        title: self.ls.get('SETTINGS')
-                    },
-                    {
-                        href: '#object_fields',
-                        icon: 'list-ul',
-                        title: self.ls.get('FIELDS')
-                    }
-                ];
+			self.objectType = data.objectType;
+			data.pills = pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls, SUB_NAV_KEY, self.objectType);
+			var angularObjects = pb.ClientJs.getAngularObjects(data);
 
-                callback(null, tabs);
-            },
+			self.setPageName(self.objectType[pb.DAO.getIdField()] ? self.objectType.name : self.ls.get('NEW_OBJECT'));
+			self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
+			self.ts.load('admin/content/objects/types/type_form', function (err, result) {
+				cb({content: result});
+			});
+		});
+	};
 
-            navigation: function(callback) {
-                callback(null, pb.AdminNavigation.get(self.session, ['content', 'custom_objects'], self.ls));
-            },
+	TypeForm.prototype.gatherData = function (vars, cb) {
+		var self = this;
+		var cos = new pb.CustomObjectService();
 
-            objectTypes: function(callback) {
-                cos.getReferenceTypes(function(err, objectTypes) {
-                    callback(err, objectTypes);
-                });
-            },
+		var tasks = {
+			tabs: function (callback) {
+				var tabs = [
+					{
+						active: 'active',
+						href: '#object_settings',
+						icon: 'cog',
+						title: self.ls.get('SETTINGS')
+					},
+					{
+						href: '#object_fields',
+						icon: 'list-ul',
+						title: self.ls.get('FIELDS')
+					}
+				];
 
-            objectType: function(callback) {
-                if(!vars.id) {
-                    var objectType = {
-                        fields: {}
-                    };
-                    callback(null, objectType);
-                    return;
-                }
+				callback(null, tabs);
+			},
 
-                cos.loadTypeById(vars.id, function(err, objectType) {
-                    delete objectType.fields.name;
-                    callback(err, objectType);
-                });
-            }
-        };
-        async.series(tasks, cb);
-    };
+			navigation: function (callback) {
+				callback(null, pb.AdminNavigation.get(self.session, ['content', 'custom_objects'], self.ls));
+			},
 
-    TypeForm.getSubNavItems = function(key, ls, data) {
-        return [{
-            name: SUB_NAV_KEY,
-            title: data[pb.DAO.getIdField()] ? ls.get('EDIT') + ' ' + data.name : ls.get('NEW_OBJECT_TYPE'),
-            icon: 'chevron-left',
-            href: '/admin/content/objects/types'
-        }, {
-            name: 'new_object_type',
-            title: '',
-            icon: 'plus',
-            href: '/admin/content/objects/types/new'
-        }];
-    };
+			objectTypes: function (callback) {
+				cos.getReferenceTypes(function (err, objectTypes) {
+					callback(err, objectTypes);
+				});
+			},
 
-    //register admin sub-nav
-    pb.AdminSubnavService.registerFor(SUB_NAV_KEY, TypeForm.getSubNavItems);
+			objectType: function (callback) {
+				if (!vars.id) {
+					var objectType = {
+						fields: {}
+					};
+					callback(null, objectType);
+					return;
+				}
 
-    //exports
-    return TypeForm;
+				cos.loadTypeById(vars.id, function (err, objectType) {
+					delete objectType.fields.name;
+					callback(err, objectType);
+				});
+			}
+		};
+		async.series(tasks, cb);
+	};
+
+	TypeForm.getSubNavItems = function (key, ls, data) {
+		return [{
+			name: SUB_NAV_KEY,
+			title: data[pb.DAO.getIdField()] ? ls.get('EDIT') + ' ' + data.name : ls.get('NEW_OBJECT_TYPE'),
+			icon: 'chevron-left',
+			href: '/admin/content/objects/types'
+		}, {
+			name: 'new_object_type',
+			title: '',
+			icon: 'plus',
+			href: '/admin/content/objects/types/new'
+		}];
+	};
+
+	//register admin sub-nav
+	pb.AdminSubnavService.registerFor(SUB_NAV_KEY, TypeForm.getSubNavItems);
+
+	//exports
+	return TypeForm;
 };

@@ -23,14 +23,20 @@
                 <div class="modal-body">
                     <span ng-if="photo.isFile">
                         <div class="progress progress-striped active" ng-if="uploading">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="{{uploadPercent}}" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{uploadPercent}}"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                         </div>
                         <span class="btn btn-success fileinput-button" ng-disabled="uploading">
-                            <i class="fa" ng-class="{'fa-plus': !uploading, 'fa-circle-o-notch fa-spin': uploading}"></i>
+                            <i class="fa"
+                               ng-class="{'fa-plus': !uploading, 'fa-circle-o-notch fa-spin': uploading}"></i>
                             <span>^loc_SELECT_FILE^...</span>
-                            <input type="file" ng-file-select="onFileSelect($files)" accept=".jpg,.jpeg,.png,.gif,.svg,.webp"></input>
+                            <input type="file" ng-file-select="onFileSelect($files)"
+                                   accept=".jpg,.jpeg,.png,.gif,.svg,.webp"></input>
                         </span>
-                        <div class="file_drop" style="margin-bottom: 1em" ng-file-drop="onFileSelect($files)" ng-file-drop-available="dropSupported=true" ng-file-drag-over-class="file_drop_hover" ng-show="dropSupported && !uploading">Drop image files here</div>
+                        <div class="file_drop" style="margin-bottom: 1em" ng-file-drop="onFileSelect($files)"
+                             ng-file-drop-available="dropSupported=true" ng-file-drag-over-class="file_drop_hover"
+                             ng-show="dropSupported && !uploading">Drop image files here
+                        </div>
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             <i class="fa fa-ban"></i>&nbsp;^loc_CANCEL^
                         </button>
@@ -38,10 +44,13 @@
                     <div ng-if="!photo.isFile">
                         <div class="form-group">
                             <label>^loc_IMAGE_URL^</label>
-                            <input type="text" class="form-control" ng-model="photo.link" placeholder="^loc_MEDIA_URL_PLACEHOLDER^"></input>
+                            <input type="text" class="form-control" ng-model="photo.link"
+                                   placeholder="^loc_MEDIA_URL_PLACEHOLDER^"></input>
                         </div>
-                        <button type="button" class="btn btn-primary" ng-click="loadMediaLink()" ng-disabled="!photo.link.length || loadingLink">
-                            <i class="fa" ng-class="{'fa-link': !loadingLink, 'fa-circle-o-notch fa-spin': loadingLink}"></i>&nbsp;^loc_LOAD_LINK^
+                        <button type="button" class="btn btn-primary" ng-click="loadMediaLink()"
+                                ng-disabled="!photo.link.length || loadingLink">
+                            <i class="fa"
+                               ng-class="{'fa-link': !loadingLink, 'fa-circle-o-notch fa-spin': loadingLink}"></i>&nbsp;^loc_LOAD_LINK^
                         </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             <i class="fa fa-ban"></i>&nbsp;^loc_CANCEL^

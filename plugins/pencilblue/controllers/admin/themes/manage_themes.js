@@ -1,126 +1,128 @@
 /*
-	Copyright (C) 2015  PencilBlue, LLC
+ Copyright (C) 2015  PencilBlue, LLC
 
-	This program is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-module.exports = function(pb) {
-    
-    //pb dependencies
-    var util = pb.util;
-    var BaseController = pb.BaseController;
-    var DAO            = pb.DAO;
-    var UrlService     = pb.UrlService;
-    
-    /**
-     * Interface for managing themes
-     */
-    function ManageThemes(){}
-    util.inherits(ManageThemes, BaseController);
+module.exports = function (pb) {
 
-    //statics
-    var SUB_NAV_KEY = 'themes_index';
+	//pb dependencies
+	var util = pb.util;
+	var BaseController = pb.BaseController;
+	var DAO = pb.DAO;
+	var UrlService = pb.UrlService;
 
-    ManageThemes.prototype.render = function(cb) {
-        var self = this;
+	/**
+	 * Interface for managing themes
+	 */
+	function ManageThemes() {
+	}
 
-        //get plugs with themes
-        var pluginService = new pb.PluginService();
-        pluginService.getPluginsWithThemes(function(err, themes) {
-            if (util.isError(err)) {
-                throw result;
-            }
+	util.inherits(ManageThemes, BaseController);
 
-            //get active theme
-            pb.settings.get('active_theme', function(err, activeTheme) {
-                if (util.isError(err)) {
-                    throw err;
-                }
+	//statics
+	var SUB_NAV_KEY = 'themes_index';
 
-                //add default pencil blue theme
-                var options = util.copyArray(themes);
-                options.push({
-                    uid: 'pencilblue',
-                    name: 'Main'
+	ManageThemes.prototype.render = function (cb) {
+		var self = this;
 
-                });
+		//get plugs with themes
+		var pluginService = new pb.PluginService();
+		pluginService.getPluginsWithThemes(function (err, themes) {
+			if (util.isError(err)) {
+				throw result;
+			}
 
-                pb.settings.get('site_logo', function(err, logo) {
-                    if(util.isError(err)) {
-                        pb.log.error("ManageThemes: Failed to retrieve site logo: "+err.stack);
-                    }
+			//get active theme
+			pb.settings.get('active_theme', function (err, activeTheme) {
+				if (util.isError(err)) {
+					throw err;
+				}
 
-                    var siteLogo = '';
-                    if (logo) {
-                        if (UrlService.isFullyQualifiedUrl(logo)) {
-                            siteLogo = logo;
-                        }
-                        else {
-                            siteLogo = UrlService.urlJoin('', logo);
-                        }
-                    }
+				//add default pencil blue theme
+				var options = util.copyArray(themes);
+				options.push({
+					uid: 'pencilblue',
+					name: 'Main'
 
-                    //setup angular
-                    var angularObjects = pb.ClientJs.getAngularObjects({
-                        navigation: pb.AdminNavigation.get(self.session, ['plugins', 'themes'], self.ls),
-                        pills: pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls),
-                        tabs: self.getTabs(),
-                        themes: themes,
-                        options: options,
-                        siteLogo: siteLogo,
-                        activeTheme: activeTheme
-                    });
+				});
 
-                    self.ts.registerLocal('image_title', '');
-                    self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
-                    self.ts.load('/admin/themes/manage_themes', function(err, data) {
-                        var result = '' + data;
-                        cb({content: result});
-                    });
-                });
-            });
-        });
-    };
+				pb.settings.get('site_logo', function (err, logo) {
+					if (util.isError(err)) {
+						pb.log.error("ManageThemes: Failed to retrieve site logo: " + err.stack);
+					}
 
-    ManageThemes.prototype.getTabs = function() {
-        return [{
-            active: 'active',
-            href: '#themes',
-            icon: 'magic',
-            title: this.ls.get('THEMES')
-        },
-        {
-            href: '#site_logo',
-            icon: 'picture-o',
-            title: this.ls.get('SITE_LOGO')
-        }];
-    };
+					var siteLogo = '';
+					if (logo) {
+						if (UrlService.isFullyQualifiedUrl(logo)) {
+							siteLogo = logo;
+						}
+						else {
+							siteLogo = UrlService.urlJoin('', logo);
+						}
+					}
 
-    ManageThemes.getSubNavItems = function(key, ls, data) {
-        return [
-            {
-                name: 'manage_themes',
-                title: ls.get('MANAGE_THEMES'),
-                icon: 'refresh',
-                href: '/admin/themes'
-            }
-       ];
-    };
+					//setup angular
+					var angularObjects = pb.ClientJs.getAngularObjects({
+						navigation: pb.AdminNavigation.get(self.session, ['plugins', 'themes'], self.ls),
+						pills: pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls),
+						tabs: self.getTabs(),
+						themes: themes,
+						options: options,
+						siteLogo: siteLogo,
+						activeTheme: activeTheme
+					});
 
-    //register admin sub-nav
-    pb.AdminSubnavService.registerFor(SUB_NAV_KEY, ManageThemes.getSubNavItems);
+					self.ts.registerLocal('image_title', '');
+					self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
+					self.ts.load('/admin/themes/manage_themes', function (err, data) {
+						var result = '' + data;
+						cb({content: result});
+					});
+				});
+			});
+		});
+	};
 
-    //exports
-    return ManageThemes;
+	ManageThemes.prototype.getTabs = function () {
+		return [{
+			active: 'active',
+			href: '#themes',
+			icon: 'magic',
+			title: this.ls.get('THEMES')
+		},
+			{
+				href: '#site_logo',
+				icon: 'picture-o',
+				title: this.ls.get('SITE_LOGO')
+			}];
+	};
+
+	ManageThemes.getSubNavItems = function (key, ls, data) {
+		return [
+			{
+				name: 'manage_themes',
+				title: ls.get('MANAGE_THEMES'),
+				icon: 'refresh',
+				href: '/admin/themes'
+			}
+		];
+	};
+
+	//register admin sub-nav
+	pb.AdminSubnavService.registerFor(SUB_NAV_KEY, ManageThemes.getSubNavItems);
+
+	//exports
+	return ManageThemes;
 };

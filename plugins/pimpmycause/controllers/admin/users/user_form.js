@@ -1,150 +1,155 @@
 /*
-	Copyright (C) 2015  PencilBlue, LLC
+ Copyright (C) 2015  PencilBlue, LLC
 
-	This program is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 //dependencies
 var async = require('async');
 
-module.exports = function(pb) {
-    
-    //pb dependencies
-    var util = pb.util;
-    
-    /**
-     * Interface for editing a user
-     */
-    function UserForm(){}
-    util.inherits(UserForm, pb.BaseController);
+module.exports = function (pb) {
 
-    //statics
-    var SUB_NAV_KEY = 'user_form';
+	//pb dependencies
+	var util = pb.util;
 
-    UserForm.prototype.render = function(cb) {
-        var self = this;
-        var vars = this.pathVars;
+	/**
+	 * Interface for editing a user
+	 */
+	function UserForm() {
+	}
 
-        this.gatherData(vars, function(err, data) {
-            if(util.isError(err)) {
-                throw err;
-            }
-            else if(!data.user) {
-                self.reqHandler.serve404();
-                return;
-            }
+	util.inherits(UserForm, pb.BaseController);
 
-            self.user = data.user;
-            data.pills = pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls, SUB_NAV_KEY, {session: self.session, user: self.user});
+	//statics
+	var SUB_NAV_KEY = 'user_form';
 
-            data.adminOptions = [{name: self.ls.get('ADMINISTRATOR'), value: pb.SecurityService.ACCESS_ADMINISTRATOR}];
-            if(!data.user[pb.DAO.getIdField()] || self.session.authentication.user_id !== data.user[pb.DAO.getIdField()].toString()) {
-                data.adminOptions = pb.users.getAdminOptions(self.session, self.localizationService);
-            }
+	UserForm.prototype.render = function (cb) {
+		var self = this;
+		var vars = this.pathVars;
 
-            var angularObjects = pb.ClientJs.getAngularObjects(data);
+		this.gatherData(vars, function (err, data) {
+			if (util.isError(err)) {
+				throw err;
+			}
+			else if (!data.user) {
+				self.reqHandler.serve404();
+				return;
+			}
 
-            self.setPageName(data.user[pb.DAO.getIdField()] ? data.user.username : self.ls.get('NEW_USER'));
-            self.ts.registerLocal('image_title', self.ls.get('USER_PHOTO'));
-            self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
-            self.ts.load('admin/users/user_form', function(err, result) {
-                cb({content: result});
-            });
-        });
-    };
+			self.user = data.user;
+			data.pills = pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls, SUB_NAV_KEY, {
+				session: self.session,
+				user: self.user
+			});
 
-    UserForm.prototype.gatherData = function(vars, cb) {
-        var self = this;
-        var tasks = {
-            tabs: function(callback) {
-                var tabs = [{
-                    active: 'active',
-                    href: '#account_info',
-                    icon: 'cog',
-                    title: self.ls.get('ACCOUNT_INFO')
-                }, {
-                    href: '#personal_info',
-                    icon: 'user',
-                    title: self.ls.get('PERSONAL_INFO')
-                }];
-                callback(null, tabs);
-            },
+			data.adminOptions = [{name: self.ls.get('ADMINISTRATOR'), value: pb.SecurityService.ACCESS_ADMINISTRATOR}];
+			if (!data.user[pb.DAO.getIdField()] || self.session.authentication.user_id !== data.user[pb.DAO.getIdField()].toString()) {
+				data.adminOptions = pb.users.getAdminOptions(self.session, self.localizationService);
+			}
 
-            navigation: function(callback) {
-                callback(null, pb.AdminNavigation.get(self.session, ['users'], self.ls));
-            },
+			var angularObjects = pb.ClientJs.getAngularObjects(data);
 
-            user: function(callback) {
-                if(!vars.id) {
-                    callback(null, {});
-                    return;
-                }
+			self.setPageName(data.user[pb.DAO.getIdField()] ? data.user.username : self.ls.get('NEW_USER'));
+			self.ts.registerLocal('image_title', self.ls.get('USER_PHOTO'));
+			self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
+			self.ts.load('admin/users/user_form', function (err, result) {
+				cb({content: result});
+			});
+		});
+	};
 
-                var dao = new pb.DAO();
-                dao.loadById(vars.id, 'user', function(err, user) {
-                    delete user.password;
-                    callback(err, user);
-                });
-            },
-            
-            locales: function(callback) {
-                callback(null, pb.Localization.getSupportedWithDisplay());
-            }
-        };
-        async.series(tasks, cb);
-    };
+	UserForm.prototype.gatherData = function (vars, cb) {
+		var self = this;
+		var tasks = {
+			tabs: function (callback) {
+				var tabs = [{
+					active: 'active',
+					href: '#account_info',
+					icon: 'cog',
+					title: self.ls.get('ACCOUNT_INFO')
+				}, {
+					href: '#personal_info',
+					icon: 'user',
+					title: self.ls.get('PERSONAL_INFO')
+				}];
+				callback(null, tabs);
+			},
 
-    UserForm.getSubNavItems = function(key, ls, data) {
-        var pills = [{
-            name: 'manage_users',
-            title: data.user[pb.DAO.getIdField()] ? ls.get('EDIT') + ' ' + data.user.username : ls.get('NEW_USER'),
-            icon: 'chevron-left',
-            href: '/admin/users'
-        }];
+			navigation: function (callback) {
+				callback(null, pb.AdminNavigation.get(self.session, ['users'], self.ls));
+			},
 
-        if(data.user[pb.DAO.getIdField()]) {
-            if(data.session.authentication.user_id === data.user[pb.DAO.getIdField()].toString()) {
-                pills.push({
-                    name: 'change_password',
-                    title: ls.get('CHANGE_PASSWORD'),
-                    icon: 'key',
-                    href: '/admin/users/password/' + data.user[pb.DAO.getIdField()].toString()
-                });
-            }
-            else if(data.session.authentication.admin_level >= pb.SecurityService.ACCESS_MANAGING_EDITOR) {
-                pills.push({
-                    name: 'reset_password',
-                    title: ls.get('RESET_PASSWORD'),
-                    icon: 'key',
-                    href: '/actions/admin/users/send_password_reset/' + data.user[pb.DAO.getIdField()].toString()
-                });
-            }
-        }
+			user: function (callback) {
+				if (!vars.id) {
+					callback(null, {});
+					return;
+				}
 
-        pills.push({
-            name: 'new_user',
-            title: '',
-            icon: 'plus',
-            href: '/admin/users/new'
-        });
+				var dao = new pb.DAO();
+				dao.loadById(vars.id, 'user', function (err, user) {
+					delete user.password;
+					callback(err, user);
+				});
+			},
 
-        return pills;
-    };
+			locales: function (callback) {
+				callback(null, pb.Localization.getSupportedWithDisplay());
+			}
+		};
+		async.series(tasks, cb);
+	};
 
-    //register admin sub-nav
-    pb.AdminSubnavService.registerFor(SUB_NAV_KEY, UserForm.getSubNavItems);
+	UserForm.getSubNavItems = function (key, ls, data) {
+		var pills = [{
+			name: 'manage_users',
+			title: data.user[pb.DAO.getIdField()] ? ls.get('EDIT') + ' ' + data.user.username : ls.get('NEW_USER'),
+			icon: 'chevron-left',
+			href: '/admin/users'
+		}];
 
-    //exports
-    return UserForm;
+		if (data.user[pb.DAO.getIdField()]) {
+			if (data.session.authentication.user_id === data.user[pb.DAO.getIdField()].toString()) {
+				pills.push({
+					name: 'change_password',
+					title: ls.get('CHANGE_PASSWORD'),
+					icon: 'key',
+					href: '/admin/users/password/' + data.user[pb.DAO.getIdField()].toString()
+				});
+			}
+			else if (data.session.authentication.admin_level >= pb.SecurityService.ACCESS_MANAGING_EDITOR) {
+				pills.push({
+					name: 'reset_password',
+					title: ls.get('RESET_PASSWORD'),
+					icon: 'key',
+					href: '/actions/admin/users/send_password_reset/' + data.user[pb.DAO.getIdField()].toString()
+				});
+			}
+		}
+
+		pills.push({
+			name: 'new_user',
+			title: '',
+			icon: 'plus',
+			href: '/admin/users/new'
+		});
+
+		return pills;
+	};
+
+	//register admin sub-nav
+	pb.AdminSubnavService.registerFor(SUB_NAV_KEY, UserForm.getSubNavItems);
+
+	//exports
+	return UserForm;
 }

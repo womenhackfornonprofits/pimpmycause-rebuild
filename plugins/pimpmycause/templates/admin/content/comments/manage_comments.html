@@ -9,7 +9,8 @@
     <div class="table_container">
         <table id="comments_table" class="table table-responsive table-condensed">
             ^tmp_admin=elements=table_headers^
-            <tr class="comment_row" ng-repeat="comment in comments track by comment._id" ng-if="!comment.hidden && !comment.paginated">
+            <tr class="comment_row" ng-repeat="comment in comments track by comment._id"
+                ng-if="!comment.hidden && !comment.paginated">
                 <td><a ng-href="/admin/users/{{comment.commenter}}" ng-bind="comment.user_name"></a></td>
                 <td><a ng-href="/article/{{comment.article_url}}" ng-bind="comment.article_headline"></a></td>
                 <td ng-bind="comment.content"></td>
@@ -23,14 +24,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    ^loc_CONFIRM_DELETE_COMMENT^ <span style="font-style: italic" ng-bind="objectToDelete[deleteNameKey]"></span>?
+                    ^loc_CONFIRM_DELETE_COMMENT^ <span style="font-style: italic"
+                                                       ng-bind="objectToDelete[deleteNameKey]"></span>?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="deleting">
                         <i class="fa fa-ban"></i>&nbsp;^loc_CANCEL^
                     </button>
                     <button type="button" class="btn btn-danger" ng-click="deleteObject()" ng-disabled="deleting">
-                        <i class="fa fa-trash"></i>&nbsp;^loc_DELETE^&nbsp;<i class="fa fa-spinner fa-spin" ng-if="deleting"></i>
+                        <i class="fa fa-trash"></i>&nbsp;^loc_DELETE^&nbsp;<i class="fa fa-spinner fa-spin"
+                                                                              ng-if="deleting"></i>
                     </button>
                 </div>
             </div>

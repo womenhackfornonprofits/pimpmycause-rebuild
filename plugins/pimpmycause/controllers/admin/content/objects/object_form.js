@@ -1,263 +1,268 @@
 /*
-    Copyright (C) 2015  PencilBlue, LLC
+ Copyright (C) 2015  PencilBlue, LLC
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 //dependencies
 var async = require('async');
 
-module.exports = function(pb) {
-    
-    //pb dependencies
-    var util = pb.util;
-    
-    /**
-     * Interface for editing an object
-     * @class ObjectFormController
-     * @constructor
-     */
-    function ObjectFormController() {}
-    util.inherits(ObjectFormController, pb.BaseController);
+module.exports = function (pb) {
 
-    var SUB_NAV_KEY = 'object_form';
+	//pb dependencies
+	var util = pb.util;
 
-    ObjectFormController.prototype.render = function(cb) {
-        var self = this;
-        var vars = this.pathVars;
+	/**
+	 * Interface for editing an object
+	 * @class ObjectFormController
+	 * @constructor
+	 */
+	function ObjectFormController() {
+	}
 
-        if(!pb.validation.isIdStr(vars.type_id, true)) {
-            return self.redirect('/admin/content/objects/types', cb);
-        }
+	util.inherits(ObjectFormController, pb.BaseController);
 
-        this.gatherData(vars, function(err, data) {
-            if (util.isError(err)) {
-                return self.reqHandler.serveError(err);
-            }
-            else if(!data.customObject) {
-                return self.reqHandler.serve404();
-            }
+	var SUB_NAV_KEY = 'object_form';
 
-            //TODO: exclude the IDs from the load options query when type is child objects
-            // Remove active child objects from available objects list
-            if(data.customObject[pb.DAO.getIdField()]) {
+	ObjectFormController.prototype.render = function (cb) {
+		var self = this;
+		var vars = this.pathVars;
 
-                //iterate over fields
-                for(var i = 0; i < data.objectType.fields.length; i++) {
-                    var custObjField = data.objectType.fields[i];
+		if (!pb.validation.isIdStr(vars.type_id, true)) {
+			return self.redirect('/admin/content/objects/types', cb);
+		}
 
-                    //perform operation only when field type is child objects
-                    if(custObjField.field_type === 'child_objects') {
+		this.gatherData(vars, function (err, data) {
+			if (util.isError(err)) {
+				return self.reqHandler.serveError(err);
+			}
+			else if (!data.customObject) {
+				return self.reqHandler.serve404();
+			}
 
-                        //iterate over objects selected for the child objects field
-                        for(var j = 0; j < data.customObject[custObjField.name].length; j++) {
-                            var associatedObj = data.customObject[custObjField.name][j];
+			//TODO: exclude the IDs from the load options query when type is child objects
+			// Remove active child objects from available objects list
+			if (data.customObject[pb.DAO.getIdField()]) {
 
-                            //iterate over the entire list of possible objects that could be linked back as a child object
-                            for(var s = 0; s < custObjField.available_objects.length; s++) {
-                                var availableObj = custObjField.available_objects[s];
+				//iterate over fields
+				for (var i = 0; i < data.objectType.fields.length; i++) {
+					var custObjField = data.objectType.fields[i];
 
-                                //when an associated child object is found in the overall list of items
-                                if(pb.DAO.areIdsEqual(associatedObj[pb.DAO.getIdField()], availableObj[pb.DAO.getIdField()])) {
+					//perform operation only when field type is child objects
+					if (custObjField.field_type === 'child_objects') {
 
-                                    //remove it from the list of possible objects to choose from
-                                    custObjField.available_objects.splice(s, 1);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+						//iterate over objects selected for the child objects field
+						for (var j = 0; j < data.customObject[custObjField.name].length; j++) {
+							var associatedObj = data.customObject[custObjField.name][j];
 
-            self.objectType = data.objectType;
-            self.customObject = data.customObject;
-            data.pills = pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls, SUB_NAV_KEY, {objectType: self.objectType, customObject: self.customObject});
-            var angularObjects = pb.ClientJs.getAngularObjects(data);
+							//iterate over the entire list of possible objects that could be linked back as a child object
+							for (var s = 0; s < custObjField.available_objects.length; s++) {
+								var availableObj = custObjField.available_objects[s];
 
-            self.setPageName(self.customObject[pb.DAO.getIdField()] ? self.customObject.name : self.ls.get('NEW') + ' ' + self.objectType.name + ' ' + self.ls.get('OBJECT'));
-            self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
-            self.ts.load('admin/content/objects/object_form',  function(err, result) {
-                cb({content: result});
-            });
-        });
-    };
+								//when an associated child object is found in the overall list of items
+								if (pb.DAO.areIdsEqual(associatedObj[pb.DAO.getIdField()], availableObj[pb.DAO.getIdField()])) {
 
-    ObjectFormController.prototype.gatherData = function(vars, cb) {
-        var self = this;
-        var cos = new pb.CustomObjectService();
+									//remove it from the list of possible objects to choose from
+									custObjField.available_objects.splice(s, 1);
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
 
-        var tasks = {
-            tabs: function(callback) {
-                var tabs = [
-                    {
-                        active: 'active',
-                        href: '#object_fields',
-                        icon: 'list-ul',
-                        title: self.ls.get('FIELDS')
-                    }
-                ];
+			self.objectType = data.objectType;
+			self.customObject = data.customObject;
+			data.pills = pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls, SUB_NAV_KEY, {
+				objectType: self.objectType,
+				customObject: self.customObject
+			});
+			var angularObjects = pb.ClientJs.getAngularObjects(data);
 
-                callback(null, tabs);
-            },
+			self.setPageName(self.customObject[pb.DAO.getIdField()] ? self.customObject.name : self.ls.get('NEW') + ' ' + self.objectType.name + ' ' + self.ls.get('OBJECT'));
+			self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
+			self.ts.load('admin/content/objects/object_form', function (err, result) {
+				cb({content: result});
+			});
+		});
+	};
 
-            navigation: function(callback) {
-                callback(null, pb.AdminNavigation.get(self.session, ['content', 'custom_objects'], self.ls));
-            },
+	ObjectFormController.prototype.gatherData = function (vars, cb) {
+		var self = this;
+		var cos = new pb.CustomObjectService();
 
-            objectType: function(callback) {
-                cos.loadTypeById(vars.type_id, function(err, objectType) {
-                    if(util.isError(err)) {
-                        callback(err, customObject);
-                        return;
-                    }
+		var tasks = {
+			tabs: function (callback) {
+				var tabs = [
+					{
+						active: 'active',
+						href: '#object_fields',
+						icon: 'list-ul',
+						title: self.ls.get('FIELDS')
+					}
+				];
 
-                    self.loadFieldOptions(cos, objectType, callback);
-                });
-            },
+				callback(null, tabs);
+			},
 
-            customObject: function(callback) {
-                if(!vars.id) {
-                    callback(null, {});
-                    return;
-                }
+			navigation: function (callback) {
+				callback(null, pb.AdminNavigation.get(self.session, ['content', 'custom_objects'], self.ls));
+			},
 
-                cos.loadById(vars.id, {fetch_depth: 1}, callback);
-            }
-        };
-        async.series(tasks, cb);
-    };
+			objectType: function (callback) {
+				cos.loadTypeById(vars.type_id, function (err, objectType) {
+					if (util.isError(err)) {
+						callback(err, customObject);
+						return;
+					}
 
-    ObjectFormController.prototype.loadFieldOptions = function(service, objectType, cb) {
-        var self         = this;
-        var keys         = Object.keys(objectType.fields);
-        var custObjTypes = {};
-        var dao          = new pb.DAO();
-        var userService  = new pb.UserService();
+					self.loadFieldOptions(cos, objectType, callback);
+				});
+			},
 
-        //wrapper function to load cust object type
-        var loadType = function(name, callback) {
-            if (custObjTypes[name]) {
-                return callback(null, custObjTypes[name]);
-            }
+			customObject: function (callback) {
+				if (!vars.id) {
+					callback(null, {});
+					return;
+				}
 
-            service.loadTypeByName(name, function(err, custObjType) {
-                custObjTypes[name] = custObjType;
-                callback(err, custObjType);
-            });
-        };
+				cos.loadById(vars.id, {fetch_depth: 1}, callback);
+			}
+		};
+		async.series(tasks, cb);
+	};
 
-        var tasks = util.getTasks(keys, function(keys, i) {
-            return function(callback) {
+	ObjectFormController.prototype.loadFieldOptions = function (service, objectType, cb) {
+		var self = this;
+		var keys = Object.keys(objectType.fields);
+		var custObjTypes = {};
+		var dao = new pb.DAO();
+		var userService = new pb.UserService();
 
-                //only proceed for peer or child object types
-                var key = keys[i];
-                if(!pb.CustomObjectService.isReferenceFieldType(objectType.fields[key].field_type)) {
-                    return callback();
-                }
+		//wrapper function to load cust object type
+		var loadType = function (name, callback) {
+			if (custObjTypes[name]) {
+				return callback(null, custObjTypes[name]);
+			}
 
-                //field represents a reference to a custom field
-                if(pb.CustomObjectService.isCustomObjectType(objectType.fields[key].object_type)) {
+			service.loadTypeByName(name, function (err, custObjType) {
+				custObjTypes[name] = custObjType;
+				callback(err, custObjType);
+			});
+		};
 
-                    loadType(objectType.fields[key].object_type, function(err, customObjectType) {
-                        if (util.isError(err)) {
-                            return callback(err);
-                        }
+		var tasks = util.getTasks(keys, function (keys, i) {
+			return function (callback) {
 
-                        //TODO: This is REALLY bad for large systems.  This needs to move to an API call (searchable and pagable)
-                        //TODO: decide if we should exclude the iD of the item we are working on
-                        var options = { select: { name: 1 } };
-                        service.findByType(customObjectType, options, function(err, customObjectsInfo) {
-                            if (util.isError(err)) {
-                                return callback(err);
-                            }
+				//only proceed for peer or child object types
+				var key = keys[i];
+				if (!pb.CustomObjectService.isReferenceFieldType(objectType.fields[key].field_type)) {
+					return callback();
+				}
 
-                            objectType.fields[key].available_objects = customObjectsInfo;
-                            callback();
-                        });
-                    });
-                    return;
-                }
+				//field represents a reference to a custom field
+				if (pb.CustomObjectService.isCustomObjectType(objectType.fields[key].object_type)) {
 
-                //TODO: This is REALLY bad for large systems.  This needs to move 
-                //to an API call (searchable and pagable)
-                var query = {
-                    where: pb.DAO.ANYWHERE,
-                    select: {
-                        name: 1,
-                        headline: 1,
-                        first_name: 1,
-                        last_name: 1
-                    }
-                };
-                dao.q(objectType.fields[key].object_type, query, function(err, availableObjects) {
-                    if (util.isError(err)) {
-                        return callback(err);
-                    }
+					loadType(objectType.fields[key].object_type, function (err, customObjectType) {
+						if (util.isError(err)) {
+							return callback(err);
+						}
 
-                    var objectsInfo = [];
-                    for(var i = 0; i < availableObjects.length; i++) {
+						//TODO: This is REALLY bad for large systems.  This needs to move to an API call (searchable and pagable)
+						//TODO: decide if we should exclude the iD of the item we are working on
+						var options = {select: {name: 1}};
+						service.findByType(customObjectType, options, function (err, customObjectsInfo) {
+							if (util.isError(err)) {
+								return callback(err);
+							}
 
-                        var descriptor = {
-                            name: availableObjects[i].name || availableObjects[i].headline || userService.getFormattedName(availableObjects[i])
-                        };
-                        descriptor[pb.DAO.getIdField()] = availableObjects[i][pb.DAO.getIdField()]
-                        objectsInfo.push(descriptor);
-                    }
+							objectType.fields[key].available_objects = customObjectsInfo;
+							callback();
+						});
+					});
+					return;
+				}
 
-                    objectType.fields[key].available_objects = objectsInfo;
-                    callback();
-                });
-            };
-        });
-        async.parallel(tasks, function(err, results) {
+				//TODO: This is REALLY bad for large systems.  This needs to move
+				//to an API call (searchable and pagable)
+				var query = {
+					where: pb.DAO.ANYWHERE,
+					select: {
+						name: 1,
+						headline: 1,
+						first_name: 1,
+						last_name: 1
+					}
+				};
+				dao.q(objectType.fields[key].object_type, query, function (err, availableObjects) {
+					if (util.isError(err)) {
+						return callback(err);
+					}
 
-            //TODO find out why we do this
-            delete objectType.fields.name;
+					var objectsInfo = [];
+					for (var i = 0; i < availableObjects.length; i++) {
 
-            var fieldsArray = [{name: 'name', field_type: 'text'}];
-            for(var key in objectType.fields) {
-                var field = JSON.parse(JSON.stringify(objectType.fields[key]));
-                field.name = key;
-                fieldsArray.push(field);
-            }
+						var descriptor = {
+							name: availableObjects[i].name || availableObjects[i].headline || userService.getFormattedName(availableObjects[i])
+						};
+						descriptor[pb.DAO.getIdField()] = availableObjects[i][pb.DAO.getIdField()]
+						objectsInfo.push(descriptor);
+					}
 
-            objectType.fields = fieldsArray;
-            cb(err, objectType);
-        });
-    };
+					objectType.fields[key].available_objects = objectsInfo;
+					callback();
+				});
+			};
+		});
+		async.parallel(tasks, function (err, results) {
 
-    ObjectFormController.getSubNavItems = function(key, ls, data) {
-        return [
-            {
-                name: 'manage_objects',
-                title: data.customObject[pb.DAO.getIdField()] ? ls.get('EDIT') + ' ' + data.customObject.name : ls.get('NEW') + ' ' + data.objectType.name + ' ' + ls.get('OBJECT'),
-                icon: 'chevron-left',
-                href: '/admin/content/objects/' + data.objectType[pb.DAO.getIdField()]
-            },
-            {
-                name: 'new_object',
-                title: '',
-                icon: 'plus',
-                href: '/admin/content/objects/' + data.objectType[pb.DAO.getIdField()] + '/new'
-            }
-        ];
-    };
+			//TODO find out why we do this
+			delete objectType.fields.name;
 
-    //register admin sub-nav
-    pb.AdminSubnavService.registerFor(SUB_NAV_KEY, ObjectFormController.getSubNavItems);
+			var fieldsArray = [{name: 'name', field_type: 'text'}];
+			for (var key in objectType.fields) {
+				var field = JSON.parse(JSON.stringify(objectType.fields[key]));
+				field.name = key;
+				fieldsArray.push(field);
+			}
 
-    //exports
-    return ObjectFormController;
+			objectType.fields = fieldsArray;
+			cb(err, objectType);
+		});
+	};
+
+	ObjectFormController.getSubNavItems = function (key, ls, data) {
+		return [
+			{
+				name: 'manage_objects',
+				title: data.customObject[pb.DAO.getIdField()] ? ls.get('EDIT') + ' ' + data.customObject.name : ls.get('NEW') + ' ' + data.objectType.name + ' ' + ls.get('OBJECT'),
+				icon: 'chevron-left',
+				href: '/admin/content/objects/' + data.objectType[pb.DAO.getIdField()]
+			},
+			{
+				name: 'new_object',
+				title: '',
+				icon: 'plus',
+				href: '/admin/content/objects/' + data.objectType[pb.DAO.getIdField()] + '/new'
+			}
+		];
+	};
+
+	//register admin sub-nav
+	pb.AdminSubnavService.registerFor(SUB_NAV_KEY, ObjectFormController.getSubNavItems);
+
+	//exports
+	return ObjectFormController;
 };

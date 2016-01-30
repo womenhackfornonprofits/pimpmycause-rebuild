@@ -1,88 +1,90 @@
 /*
-    Copyright (C) 2015  PencilBlue, LLC
+ Copyright (C) 2015  PencilBlue, LLC
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-module.exports = function(pb) {
-    
-    //pb dependencies
-    var util = pb.util;
-    
-    /**
-     * Sets the sorting of objects
-     * @class SortObjectsActionController
-     * @constructor
-     */
-    function SortObjectsActionController(){}
-    util.inherits(SortObjectsActionController, pb.FormController);
+module.exports = function (pb) {
 
-    SortObjectsActionController.prototype.render = function(cb) {
-        var self = this;
-        var vars = this.pathVars;
+	//pb dependencies
+	var util = pb.util;
 
-        if(!pb.validation.isIdStr(vars.type_id, true)) {
-            return cb({
-                code: 400,
-                content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('INVALID_UID'))
-            });
-        }
+	/**
+	 * Sets the sorting of objects
+	 * @class SortObjectsActionController
+	 * @constructor
+	 */
+	function SortObjectsActionController() {
+	}
 
-        var service = new pb.CustomObjectService();
-        service.loadTypeById(vars.type_id, function(err, customObjectType) {
-            if(util.isError(err) || !util.isObject(customObjectType)) {
-                return cb({
-                    code: 400,
-                    content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('INVALID_UID'))
-                });
-            }
+	util.inherits(SortObjectsActionController, pb.FormController);
 
-            //load the existing ordering if available
-            service.loadSortOrdering(customObjectType, function(err, sortOrder) {
-                if(util.isError(err)) {
-                    return cb({
-                        code: 500,
-                        content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('ERROR_SAVING'))
-                    });
-                }
+	SortObjectsActionController.prototype.render = function (cb) {
+		var self = this;
+		var vars = this.pathVars;
 
-                //format raw post
-                var post = self.body;
-                post.custom_object_type = vars.type_id;
-                var sortOrderDoc = pb.CustomObjectService.formatRawSortOrdering(post, sortOrder);
+		if (!pb.validation.isIdStr(vars.type_id, true)) {
+			return cb({
+				code: 400,
+				content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('INVALID_UID'))
+			});
+		}
 
-                //persist ordering
-                service.saveSortOrdering(sortOrderDoc, function(err, result) {
-                    if(util.isError(err)) {
-                        return cb({
-                            code: 500,
-                            content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('ERROR_SAVING'))
-                        });
-                    }
-                    else if (util.isArray(result) && result.length > 0) {
-                        return cb({
-                            code: 500,
-                            content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('ERROR_SAVING'))
-                        });
-                    }
+		var service = new pb.CustomObjectService();
+		service.loadTypeById(vars.type_id, function (err, customObjectType) {
+			if (util.isError(err) || !util.isObject(customObjectType)) {
+				return cb({
+					code: 400,
+					content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('INVALID_UID'))
+				});
+			}
 
-                    cb({content: pb.BaseController.apiResponse(pb.BaseController.API_SUCCESS, customObjectType.name + ' ' + self.ls.get('SORT_SAVED'))});
-                });
-            });
-        });
-    };
+			//load the existing ordering if available
+			service.loadSortOrdering(customObjectType, function (err, sortOrder) {
+				if (util.isError(err)) {
+					return cb({
+						code: 500,
+						content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('ERROR_SAVING'))
+					});
+				}
 
-    //exports
-    return SortObjectsActionController;
+				//format raw post
+				var post = self.body;
+				post.custom_object_type = vars.type_id;
+				var sortOrderDoc = pb.CustomObjectService.formatRawSortOrdering(post, sortOrder);
+
+				//persist ordering
+				service.saveSortOrdering(sortOrderDoc, function (err, result) {
+					if (util.isError(err)) {
+						return cb({
+							code: 500,
+							content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('ERROR_SAVING'))
+						});
+					}
+					else if (util.isArray(result) && result.length > 0) {
+						return cb({
+							code: 500,
+							content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('ERROR_SAVING'))
+						});
+					}
+
+					cb({content: pb.BaseController.apiResponse(pb.BaseController.API_SUCCESS, customObjectType.name + ' ' + self.ls.get('SORT_SAVED'))});
+				});
+			});
+		});
+	};
+
+	//exports
+	return SortObjectsActionController;
 };

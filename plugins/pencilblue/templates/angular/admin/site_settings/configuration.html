@@ -1,24 +1,25 @@
 <script type="text/javascript">
     angular.module('pencilblueApp', [])
-    .controller('PencilBlueController', function($scope, $http) {
-        ^angular_objects^
+            .controller('PencilBlueController', function ($scope, $http) {
+                ^
+                angular_objects ^
 
-        $scope.setCallHome = function(callHome) {
-            $scope.config.callHome = callHome;
-        };
+                $scope.setCallHome = function (callHome) {
+                    $scope.config.callHome = callHome;
+                };
 
-        $scope.saveConfiguration = function() {
-            $scope.saving = true;
+                $scope.saveConfiguration = function () {
+                    $scope.saving = true;
 
-            $http.post('/actions/admin/site_settings', {call_home: $scope.config.callHome})
-            .success(function(result) {
-                $scope.successMessage = result.message;
-                $scope.saving = false;
-            })
-            .error(function(error, status) {
-                $scope.errorMessage = error.message;
-                $scope.saving = false;
+                    $http.post('/actions/admin/site_settings', {call_home: $scope.config.callHome})
+                            .success(function (result) {
+                                $scope.successMessage = result.message;
+                                $scope.saving = false;
+                            })
+                            .error(function (error, status) {
+                                $scope.errorMessage = error.message;
+                                $scope.saving = false;
+                            });
+                };
             });
-        };
-    });
 </script>

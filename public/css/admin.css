@@ -1,33 +1,28 @@
-html, body
-{
+html, body {
     font-family: 'Helvetica', 'Arial', 'Verdana', sans-serif;
     height: 100%;
 }
 
-*
-{
+* {
     -webkit-border-radius: 0 !important;
     -moz-border-radius: 0 !important;
     border-radius: 0 !important;
 }
 
-a
-{
+a {
     color: #01AAD5;
     text-decoration: none;
     outline: none;
 }
 
-a:hover
-{
+a:hover {
     color: #5D5D5D;
     text-decoration: none;
     outline: none;
 }
 
 /* Clears hanging floats */
-.spacer
-{
+.spacer {
     clear: both;
 }
 
@@ -35,155 +30,130 @@ a:hover
     cursor: pointer;
 }
 
-form .error
-{
+form .error {
     font-size: .85em;
     color: #AA0000;
     margin: 0;
 }
 
-.form-control, .input-group-addon, text-area
-{
+.form-control, .input-group-addon, text-area {
     border: 1px solid #B3B3B3;
     box-shadow: none;
 }
 
-.form-control:focus, text-area:focus
-{
+.form-control:focus, text-area:focus {
     border: 1px solid #01AAD5;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 
-#wrap
-{
+#wrap {
     min-height: 100%;
 }
 
-#main
-{
+#main {
     overflow: auto;
 }
 
-#main .row-fluid
-{
+#main .row-fluid {
     margin: 0;
 }
 
-#login_column
-{
+#login_column {
     margin: 0 auto;
     max-width: 22em;
 }
 
-#login_logo
-{
+#login_logo {
     padding: 2em 0;
     width: 100%;
 }
 
-.forgot_password
-{
+.forgot_password {
     font-size: .9em;
     margin-top: .5em;
     text-align: right;
 }
 
-#top_menu
-{
+#top_menu {
     margin-bottom: 0;
     background-color: #FFFFFF;
 }
 
-#menu_logo
-{
+#menu_logo {
     height: 1.25em;
     margin-top: -.375em;
 }
 
 /* ALERTS */
-.alert-info
-{
+.alert-info {
     background: #E7E7E7;
     color: #5D5D5D;
     border: none;
 }
 
-.error_success
-{
+.error_success {
     margin: 1em 0 0 0;
 }
 
-.alert-danger.error_success a
-{
+.alert-danger.error_success a {
     color: #B94A48;
 }
 
-.alert-success.error_success a
-{
+.alert-success.error_success a {
     color: #468847;
 }
 
 /* PANELS */
-.panel
-{
+.panel {
     box-shadow: none;
 }
 
-.panel-default .panel-heading
-{
+.panel-default .panel-heading {
     background-color: #E7E7E7;
     border: 1px solid #E7E7E7;
     color: #5D5D5D;
 }
 
 /* BUTTONS */
-.btn-primary
-{
+.btn-primary {
     background-color: #01AAD5;
     border: 1px solid #01AAD5;
 }
 
-.btn-default:hover, .btn-primary:hover, .btn-info:hover, .btn-success:hover, .btn-warning:hover
-{
+.btn-default:hover, .btn-primary:hover, .btn-info:hover, .btn-success:hover, .btn-warning:hover {
     background-color: #5D5D5D;
     border: 1px solid #5D5D5D;
     color: #FFFFFF;
 }
 
-.btn-default
-{
+.btn-default {
     background-color: #FFFFFF;
     border: 1px solid #B3B3B3;
 }
 
-.btn-info
-{
+.btn-info {
     background-color: #B3B3B3;
     border: 1px solid #B3B3B3;
 }
 
-.btn-success
-{
+.btn-success {
     background-color: #2BAA4C;
     border: 1px solid #2BAA4C;
 }
 
-.btn-warning
-{
+.btn-warning {
     background-color: #FF9F40;
     border: 1px solid #FF9F40;
 }
 
 /* LABELS */
-.label-default
-{
+.label-default {
     background-color: #E7E7E7;
     color: #5D5D5D;
 }
 
-#draft_info
-{
+#draft_info {
     margin-top: .5em;
     font-size: .9em;
     font-weight: normal;
@@ -192,134 +162,111 @@ form .error
 
 /* SIDE NAV */
 
-#side_menu
-{
+#side_menu {
     display: none;
 }
 
-#nav_accordion .panel-default .panel-heading, #nav_accordion .panel-default .panel-heading .panel-title
-{
+#nav_accordion .panel-default .panel-heading, #nav_accordion .panel-default .panel-heading .panel-title {
     background-color: #FFFFFF;
     border: none;
     color: #5D5D5D;
 }
 
-#nav_accordion .panel-default .panel-heading:hover, #nav_accordion .panel-default .panel-heading:hover .panel-title
-{
+#nav_accordion .panel-default .panel-heading:hover, #nav_accordion .panel-default .panel-heading:hover .panel-title {
     background-color: #B3B3B3;
     color: #FFFFFF;
 }
 
-#nav_accordion .panel-primary .panel-heading, #nav_accordion .panel-primary .panel-heading .panel-title
-{
+#nav_accordion .panel-primary .panel-heading, #nav_accordion .panel-primary .panel-heading .panel-title {
     background-color: #B3B3B3;
     color: #5D5D5D;
     border: none;
 }
 
-#nav_accordion .panel-primary .panel-heading:hover, #nav_accordion .panel-primary .panel-heading:hover .panel-title
-{
+#nav_accordion .panel-primary .panel-heading:hover, #nav_accordion .panel-primary .panel-heading:hover .panel-title {
     background-color: #5D5D5D;
     color: #FFFFFF;
     border: none;
 }
 
-#nav_accordion .panel
-{
+#nav_accordion .panel {
     border: none;
     box-shadow: none;
 }
 
-#nav_accordion .panel a
-{
+#nav_accordion .panel a {
     text-decoration: none;
 }
 
-#nav_accordion .panel-heading
-{
+#nav_accordion .panel-heading {
     padding: 0;
 }
 
-#nav_accordion .panel-title
-{
+#nav_accordion .panel-title {
     padding: .75em;
 }
 
-#nav_accordion .nav-pills li a
-{
+#nav_accordion .nav-pills li a {
     padding-left: 2em;
 }
 
-.nav-stacked>li+li
-{
+.nav-stacked > li + li {
     margin-top: 0;
 }
 
-.nav-pills li a
-{
+.nav-pills li a {
     color: #5D5D5D;
 }
 
-.nav-pills li a:hover
-{
+.nav-pills li a:hover {
     background-color: #E7E7E7;
 }
 
-.nav-pills li.active a
-{
+.nav-pills li.active a {
     background-color: #E7E7E7;
     color: #5D5D5D;
 }
 
-.nav-pills li.active a:hover
-{
+.nav-pills li.active a:hover {
     background-color: #B3B3B3;
     color: #FFFFFF;
 }
 
 /* SUB-NAV */
 
-#sub_nav
-{
+#sub_nav {
     margin-bottom: .5em;
     background-color: #00FF00;
 }
 
-.sub_nav
-{
+.sub_nav {
     padding: 1em 0;
 }
 
-.sub_nav > a button
-{
+.sub_nav > a button {
     margin-bottom: .5em;
 }
 
 /* TABS */
 
-.tab-content
-{
+.tab-content {
     padding: .5em;
 }
 
-.nav-tabs li a
-{
+.nav-tabs li a {
     color: #5D5D5D;
 }
 
-.nav-tabs li a:hover
-{
+.nav-tabs li a:hover {
     background-color: #E7E7E7;
     color: #5D5D5D;
 }
 
-.nav-tabs li.active a
-{
+.nav-tabs li.active a {
     color: #5D5D5D;
 }
 
-.subsection_checkboxes
-{
+.subsection_checkboxes {
     list-style: none;
     padding: .5em .5em .5em 1em;
 }
@@ -349,8 +296,7 @@ form .error
     overflow: auto;
 }
 
-.topic, .media_item, .section_item, .child_object, .custom_object
-{
+.topic, .media_item, .section_item, .child_object, .custom_object {
     font-size: 1.05em;
     font-weight: normal;
     padding: .5em;
@@ -362,13 +308,11 @@ form .error
     margin-bottom: .5em;
 }
 
-.media_item a
-{
+.media_item a {
     color: #5D5D5D;
 }
 
-.media_item a:hover
-{
+.media_item a:hover {
     color: #B3B3B3;
 }
 
@@ -376,41 +320,35 @@ form .error
     border: none;
 }
 
-.topic a
-{
+.topic a {
     color: #FFFFFF;
     text-decoration: none;
 }
 
-.topic a:hover
-{
+.topic a:hover {
     color: #428BCA;
 }
 
-.content_layout
-{
+.content_layout {
     background-color: #FFFFFF;
     margin-bottom: 1em;
     padding: 0;
     min-height: 200px;
 }
 
-.layout_editable
-{
+.layout_editable {
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
-.layout_editable, .layout_code, .layout_markdown
-{
+.layout_editable, .layout_code, .layout_markdown {
     width: 100%;
     height: 100%;
     border: none;
     padding: .5em;
 }
 
-.layout_editable:focus, .layout_code:focus, .layout_markdown:focus
-{
+.layout_editable:focus, .layout_code:focus, .layout_markdown:focus {
     outline: none;
 }
 
@@ -421,8 +359,7 @@ form .error
     text-align: center;
 }
 
-.layout_code, .layout_markdown
-{
+.layout_code, .layout_markdown {
     background-color: #333333;
     color: #FFFFFF;
     resize: none;
@@ -433,8 +370,7 @@ form .error
     background-color: #333344;
 }
 
-#column_inches
-{
+#column_inches {
     font-weight: normal;
     font-size: .9em;
 }
@@ -463,28 +399,23 @@ form .error
     display: none;
 }
 
-.footer
-{
+.footer {
     font-size: .75em;
     padding: 1.5em;
     text-align: right;
 }
 
-@media(min-width: 992px)
-{
-    #top_menu
-    {
+@media (min-width: 992px) {
+    #top_menu {
         display: none;
     }
 
-    #side_menu
-    {
+    #side_menu {
         display: block;
     }
 }
 
-.loading-modal-content
-{
+.loading-modal-content {
     width: 100%;
     padding-top: 20px;
     padding-left: 20px;
@@ -520,11 +451,11 @@ form .error
     top: 0px;
     left: 30px;
     height: 100%;
-    transform:skew(-45deg,0deg);
-    -ms-transform:skew(-45deg,0deg);
-    -moz-transform:skew(-45deg,0deg);
-    -webkit-transform:skew(-45deg,0deg);
-    -o-transform:skew(-45deg,0deg);
+    transform: skew(-45deg, 0deg);
+    -ms-transform: skew(-45deg, 0deg);
+    -moz-transform: skew(-45deg, 0deg);
+    -webkit-transform: skew(-45deg, 0deg);
+    -o-transform: skew(-45deg, 0deg);
     overflow: hidden;
     border-top: 1px solid #CCCCCC;
     border-left: 1px solid #CCCCCC;
@@ -532,11 +463,11 @@ form .error
 }
 
 .quick-nav table th.skew span {
-    transform:skew(45deg,0deg) rotate(315deg);
-    -ms-transform:skew(45deg,0deg) rotate(315deg);
-    -moz-transform:skew(45deg,0deg) rotate(315deg);
-    -webkit-transform:skew(45deg,0deg) rotate(315deg);
-    -o-transform:skew(45deg,0deg) rotate(315deg);
+    transform: skew(45deg, 0deg) rotate(315deg);
+    -ms-transform: skew(45deg, 0deg) rotate(315deg);
+    -moz-transform: skew(45deg, 0deg) rotate(315deg);
+    -webkit-transform: skew(45deg, 0deg) rotate(315deg);
+    -o-transform: skew(45deg, 0deg) rotate(315deg);
     position: absolute;
     bottom: 15px;
     left: 1px;

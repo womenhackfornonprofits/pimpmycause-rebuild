@@ -1,137 +1,139 @@
 /*
-    Copyright (C) 2015  PencilBlue, LLC
+ Copyright (C) 2015  PencilBlue, LLC
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-module.exports = function(pb) {
-    
-    //pb dependencies
-    var util           = pb.util;
-    var SectionService = pb.SectionService;
-    
-    /**
-     * Interface for editing the navigation
-     */
-    function NavigationMap(){}
-    util.inherits(NavigationMap, pb.BaseController);
+module.exports = function (pb) {
 
-    //statics
-    var SUB_NAV_KEY = 'navigation_map';
+	//pb dependencies
+	var util = pb.util;
+	var SectionService = pb.SectionService;
 
-    NavigationMap.prototype.render = function(cb) {
-        var self = this;
+	/**
+	 * Interface for editing the navigation
+	 */
+	function NavigationMap() {
+	}
 
-        var opts = {
-            where: pb.DAO.ANYWHERE
-        };
-        var dao  = new pb.DAO();
-        dao.q('section', opts, function(err, sections) {
-            if (util.isError(err)) {
-                return self.reqHandler.serveError(err);
-            }
-            else if(sections.length === 0) {
+	util.inherits(NavigationMap, pb.BaseController);
 
-                //when no sections exist redirect to create page
-                return self.redirect('/admin/content/navigation/new', cb);
-            }
+	//statics
+	var SUB_NAV_KEY = 'navigation_map';
 
-            pb.settings.get('section_map', function(err, sectionMap) {
-                if(sectionMap === null) {
-                    self.redirect('/admin/content/navigation/new', cb);
-                    return;
-                }
+	NavigationMap.prototype.render = function (cb) {
+		var self = this;
 
-                var angularObjects = pb.ClientJs.getAngularObjects(
-                    {
-                        navigation: pb.AdminNavigation.get(self.session, ['content', 'sections'], self.ls),
-                        pills: pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls, SUB_NAV_KEY),
-                        navItems: NavigationMap.getOrderedItems(sections, sectionMap),
-                        icons: {
-                            container: 'inbox',
-                            section: 'th-large',
-                            article: 'files-o',
-                            page: 'file-o',
-                            link: 'link'
-                        }
-                    }
-                );
+		var opts = {
+			where: pb.DAO.ANYWHERE
+		};
+		var dao = new pb.DAO();
+		dao.q('section', opts, function (err, sections) {
+			if (util.isError(err)) {
+				return self.reqHandler.serveError(err);
+			}
+			else if (sections.length === 0) {
 
-                self.setPageName(self.ls.get('NAV_MAP'));
-                self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
-                self.ts.load('admin/content/navigation/nav_map', function(err, data) {
-                    var result = '' + data;
-                    cb({content: result});
-                });
-            });
-        });
-    };
+				//when no sections exist redirect to create page
+				return self.redirect('/admin/content/navigation/new', cb);
+			}
 
-    NavigationMap.getOrderedItems = function(sections, sectionMap) {
-        var orderedSections = [];
-        for(var i = 0; i < sectionMap.length; i++) {
+			pb.settings.get('section_map', function (err, sectionMap) {
+				if (sectionMap === null) {
+					self.redirect('/admin/content/navigation/new', cb);
+					return;
+				}
 
-            var parentSection = null;
-            for(var j = 0; j < sections.length; j++) {
-                if(sectionMap[i].uid == sections[j][pb.DAO.getIdField()]) {
-                    parentSection          = sections[j];
-                    parentSection.children = [];
-                    sections.splice(j, 1);
-                    break;
-                }
-            }
+				var angularObjects = pb.ClientJs.getAngularObjects(
+					{
+						navigation: pb.AdminNavigation.get(self.session, ['content', 'sections'], self.ls),
+						pills: pb.AdminSubnavService.get(SUB_NAV_KEY, self.ls, SUB_NAV_KEY),
+						navItems: NavigationMap.getOrderedItems(sections, sectionMap),
+						icons: {
+							container: 'inbox',
+							section: 'th-large',
+							article: 'files-o',
+							page: 'file-o',
+							link: 'link'
+						}
+					}
+				);
 
-            if(!parentSection) {
-                continue;
-            }
+				self.setPageName(self.ls.get('NAV_MAP'));
+				self.ts.registerLocal('angular_objects', new pb.TemplateValue(angularObjects, false));
+				self.ts.load('admin/content/navigation/nav_map', function (err, data) {
+					var result = '' + data;
+					cb({content: result});
+				});
+			});
+		});
+	};
 
-            for(var o = 0; o < sectionMap[i].children.length; o++) {
-                for(j = 0; j < sections.length; j++) {
-                    if(pb.DAO.areIdsEqual(sections[j][pb.DAO.getIdField()], sectionMap[i].children[o].uid)) {
-                        parentSection.children.push(sections[j]);
-                        sections.splice(j, 1);
-                        break;
-                    }
-                }
-            }
+	NavigationMap.getOrderedItems = function (sections, sectionMap) {
+		var orderedSections = [];
+		for (var i = 0; i < sectionMap.length; i++) {
 
-            orderedSections.push(parentSection);
-        }
+			var parentSection = null;
+			for (var j = 0; j < sections.length; j++) {
+				if (sectionMap[i].uid == sections[j][pb.DAO.getIdField()]) {
+					parentSection = sections[j];
+					parentSection.children = [];
+					sections.splice(j, 1);
+					break;
+				}
+			}
 
-        for(i = 0; i < sections.length; i++) {
-            sections[i].children = [];
-            orderedSections.push(sections[i]);
-        }
+			if (!parentSection) {
+				continue;
+			}
 
-        return orderedSections;
-    };
+			for (var o = 0; o < sectionMap[i].children.length; o++) {
+				for (j = 0; j < sections.length; j++) {
+					if (pb.DAO.areIdsEqual(sections[j][pb.DAO.getIdField()], sectionMap[i].children[o].uid)) {
+						parentSection.children.push(sections[j]);
+						sections.splice(j, 1);
+						break;
+					}
+				}
+			}
 
-    NavigationMap.getSubNavItems = function(key, ls, data) {
-        var pills = SectionService.getPillNavOptions();
-        pills.unshift(
-        {
-            name: SUB_NAV_KEY,
-            title: ls.get('NAV_MAP'),
-            icon: 'refresh',
-            href: '/admin/content/navigation'
-        });
-        return pills;
-    };
+			orderedSections.push(parentSection);
+		}
 
-    //register admin sub-nav
-    pb.AdminSubnavService.registerFor(SUB_NAV_KEY, NavigationMap.getSubNavItems);
+		for (i = 0; i < sections.length; i++) {
+			sections[i].children = [];
+			orderedSections.push(sections[i]);
+		}
 
-    //exports
-    return NavigationMap;
+		return orderedSections;
+	};
+
+	NavigationMap.getSubNavItems = function (key, ls, data) {
+		var pills = SectionService.getPillNavOptions();
+		pills.unshift(
+			{
+				name: SUB_NAV_KEY,
+				title: ls.get('NAV_MAP'),
+				icon: 'refresh',
+				href: '/admin/content/navigation'
+			});
+		return pills;
+	};
+
+	//register admin sub-nav
+	pb.AdminSubnavService.registerFor(SUB_NAV_KEY, NavigationMap.getSubNavItems);
+
+	//exports
+	return NavigationMap;
 };
