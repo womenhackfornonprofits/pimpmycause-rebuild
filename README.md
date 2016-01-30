@@ -5,10 +5,19 @@
 # Pimp My Cause
 Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by [Women Hack For Non Profits](womenhackfornonprofits.com)
 
-To get started you must install all dependencies by running `npm install` in the command line.
+To get started you must install all dependencies by running `npm install` and `bower install` in the command line.
+You will also need to install the PencilBlue command line interface tools `npm install -g pencilblue-cli`. For more information about installing PencilBlue please visit the [wiki](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation).
+
+To run the project on your local machine - `pbctrl start` to start the PencilBlue CMS and you will be able to view in your browser [`http://localhost:8080/`](http://localhost:8080/)
+
+## Technology Stack
+| Backend       | Frontend          | 
+| ------------- |:-----------------:| 
+| Node.js       | HTML              | 
+| MongoDB       | CSS               |  
 
 ## Continuous Integration, Code Coverage and Unit Tests
-All builds are performed by [Travis-CI](travis-ci.org) and can found [here](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild/). To view details of our code coverage visit [Coveralls.io](https://coveralls.io/github/womenhackfornonprofits/pimpmycause-rebuild) and we are using [Mocha](https://mochajs.org) as our testing framework. 
+All builds are performed by [Travis-CI](travis-ci.org) and can found [here](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild/). To view details of our code coverage visit [Code Climate](https://codeclimate.com/github/womenhackfornonprofits/pimpmycause-rebuild) and we are using [Mocha](https://mochajs.org) as our testing framework.
 
 ## The Team
 #### Front End Developers

@@ -1,0 +1,48 @@
+{
+  "uid": "pimpmycause",
+  "name": "Pimp My Cause",
+  "description": "The main theme/plugin for the Pimp My Cause website, including all core functionality",
+  "version": "0.1.0",
+  "icon": "",
+  "author": {
+    "name": "Women Hack for Non-Profits",
+    "email": "help@womenhackfornonprofits.com",
+    "website": "http://www.pimpmycause.org",
+    "contributors": [
+      {
+        "name": "Liliana Kastilio",
+        "email": ""
+      },
+      {
+        "name": "Tanya Powell",
+        "email": ""
+      },
+      {
+        "name": "Rhonda Impey",
+        "email": ""
+      },
+      {
+        "name": "Tzhe'ela Trooper",
+        "email": ""
+      },
+      {
+        "name": "Yana Bartzi",
+        "email": ""
+      }
+    ]
+  },
+  "settings": [],
+  "permissions": {
+    "ACCESS_USER": [],
+    "ACCESS_WRITER": [],
+    "ACCESS_EDITOR": [],
+    "ACCESS_MANAGING_EDITOR": []
+  },
+  "main_module": {
+    "path": "main.js"
+  },
+  "theme": {
+    "settings": [],
+    "content_templates": []
+  }
+}
