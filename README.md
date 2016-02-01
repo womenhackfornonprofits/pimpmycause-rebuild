@@ -5,10 +5,26 @@
 # Pimp My Cause
 Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by [Women Hack For Non Profits](womenhackfornonprofits.com)
 
-To get started you must install all dependencies by running `npm install` and `bower install` in the command line.
-You will also need to install the PencilBlue command line interface tools `npm install -g pencilblue-cli`. For more information about installing PencilBlue please visit the [wiki](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation).
+## Set Up
+1. Install NPM
+First you will need to install [NPM](https://nodejs.org/) to manage packages 
+2. Install [Grunt](http://gruntjs.com/getting-started)
+3. Clone the repo: 
+`git clone git@github.com:womenhackfornonprofits/pimpmycause-rebuild.git`
+4. Install [Bower](http://bower.io/#install-bower)
+5. Install PencilBlue command line interface tools:
+`npm install -g pencilblue-cli`
 
-To run the project on your local machine - `pbctrl start` to start the PencilBlue CMS and you will be able to view in your browser [`http://localhost:8080/`](http://localhost:8080/)
+*Note*: you might need to use `sudo`.
+
+For more information about installing PencilBlue please visit the [wiki](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation).
+
+## Running on your local machine
+To run the project on your local machine:
+
+`pbctrl start` 
+
+To start the PencilBlue CMS and you will be able to view in your browser [`http://localhost:8080/`](http://localhost:8080/)
 
 ## Technology Stack
 | Backend       | Frontend          | 
@@ -28,6 +44,7 @@ All builds are performed by [Travis-CI](travis-ci.org) and can found [here](http
 - [Tanya Powell](https://github.com/tanyapowell)
 - [Tzhe'ela Trooper](https://github.com/MsToT)
 - [Yana Bartzi](https://github.com/yanabar)
+
 
 
 Notes:
