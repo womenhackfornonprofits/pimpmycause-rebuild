@@ -64,6 +64,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.1.0",
+    "chai": "^3.5.0",
     "codeclimate-test-reporter": "^0.3.0",
     "coveralls": "^2.11.6",
     "grunt": "^0.4.5",
@@ -77,15 +78,16 @@
     "grunt-contrib-uglify": "^0.10.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-coveralls": "^1.0.0",
+    "grunt-eslint": "^17.3.1",
     "grunt-gh-pages": "^1.0.0",
     "grunt-mocha-istanbul": "^3.0.1",
     "grunt-postcss": "^0.7.1",
     "grunt-ssi": "^0.2.1",
     "istanbul": "^0.4.2",
     "mocha": "^2.3.4",
+    "mocha-lcov-reporter": "0.0.1",
     "pixrem": "^3.0.0",
     "rucksack-css": "^0.8.5",
-    "mocha-lcov-reporter": "0.0.1",
     "should": "5.0.1"
   }
 }
