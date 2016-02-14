@@ -1,3 +1,6 @@
+Hey Yana - this is a test
+
+
 [![Build Status](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild.svg?branch=master)](https://travis-ci.org/womenhackfornonprofits/pimpmycause-rebuild)
 [![Test Coverage](https://codeclimate.com/github/womenhackfornonprofits/pimpmycause-rebuild/badges/coverage.svg)](https://codeclimate.com/github/womenhackfornonprofits/pimpmycause-rebuild/coverage)
 [![Code Climate](https://codeclimate.com/github/womenhackfornonprofits/pimpmycause-rebuild/badges/gpa.svg)](https://codeclimate.com/github/womenhackfornonprofits/pimpmycause-rebuild)
