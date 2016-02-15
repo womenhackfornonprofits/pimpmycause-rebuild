@@ -2,7 +2,7 @@
    LAYOUT / FORMS
    ================================= */
 
-#sign-in, #sign-up, #contact-us {
+#sign-in, #sign-up, #contact-us, #newsletter {
 	margin: 0 auto;
 	label {
 		display: none;
@@ -30,4 +30,11 @@
 		}
 	}
 
+}
+
+#newsletter {
+	.button {
+		background-color: $colr-btn-newsleter;
+		width: 10em;
+	}
 }
