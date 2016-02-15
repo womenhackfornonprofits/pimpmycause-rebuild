@@ -1,3 +1,33 @@
 /* =================================
    LAYOUT / FORMS
    ================================= */
+
+#sign-in, #sign-up {
+	margin: 0 auto;
+	label {
+		display: none;
+	}
+	a {
+		color: $colr-txt-dark;
+		display: block;
+		margin: 0;
+	}
+	.txt-right {
+		text-align: right;
+		clear: both;
+	}
+}
+
+#sign-up {
+	.inline-select {
+		display: inline-block;
+		label {
+			display: inline-block;
+		}
+		select {
+			width: auto;
+			min-width: 7em;
+		}
+	}
+
+}
