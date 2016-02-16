@@ -16,6 +16,9 @@
 		text-align: right;
 		clear: both;
 	}
+	.button {
+		width: 100%; 
+	}
 }
 
 #sign-up {
@@ -35,6 +38,6 @@
 #newsletter {
 	.button {
 		background-color: $colr-btn-newsleter;
-		width: 10em;
+		//width: 10em;
 	}
 }
