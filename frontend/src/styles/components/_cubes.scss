@@ -24,8 +24,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    transition: all 250ms ease;
-    // move cube forward to start with
+    transition: all 500ms ease;
+    // move cube forward to start with as rotation point in centre of cube
     transform: perspective(500px) rotateY(-90deg) translateX(-50%) rotateY(90deg);
     transform-style: preserve-3d;
 }
@@ -92,15 +92,9 @@
 }
 
 /* Rotate the cube - both panels together */
-.cube.flip-to-top:hover {
+.cube.flip-to-top.active {
     // as you flip the cube back you need to move it forward fifty percent of height as rotation point is in the middle of the cube
     transform: perspective(500px) rotateX(-90deg) translateY(50%);
-    z-index: 10;
-}
-
-.cube.flip-to-bottom:hover {
-    // as you flip the cube forward you need to move it back fifty percent of height as rotation point is in the middle of the cube
-    transform: perspective(500px) rotateX(90deg) translateY(-50%);
     z-index: 10;
 }
 
