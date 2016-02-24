@@ -4,7 +4,7 @@ $(window).on("load", function() {
     
     // rotating the cubes on the front hero panel using a timer
     
-    var x = true;
+    var loop_condition = true;
     
     var topLeft = $(".cube").eq(0);
     var topRight = $(".cube").eq(1);
@@ -13,14 +13,14 @@ $(window).on("load", function() {
     
     setInterval(function () {
         
-        if (x) {
+        if (loop_condition) {
             topLeft.toggleClass("active");
             bottomRight.toggleClass("active");
         } else {
             topRight.toggleClass("active");
             bottomLeft.toggleClass("active");
         }
-        x = !x;
+        loop_condition = !loop_condition;
 
     }, 2000);
     
