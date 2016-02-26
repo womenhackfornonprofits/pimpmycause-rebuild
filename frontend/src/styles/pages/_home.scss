@@ -2,25 +2,8 @@
    PAGES / HOME 
    ================================= */
 
-$triangle-border-left: rem-calc(38);
-$triangle-border-right: rem-calc(38);
-$triangle-border-bottom: rem-calc(38);
-$triangle-pos-top: -$triangle-border-bottom;
-
-.triangle-up {
-    width: 0;
-    height: 0;
-    border-left: $triangle-border-left solid transparent;
-    border-right: $triangle-border-right solid transparent;
-    top: $triangle-pos-top + rem-calc(1); // overlap of 1px as chrome inconsistently leaves a 1px gap between pnl and triangle
-    left: 50%;
-    transform: translateX(-50%);
-    position: absolute;
-    z-index: 20;
-}
-
 .pnl {
-    // padding-top: rem-calc(65); not able to add padding to top as colours over before arrow up
+    // padding-top: rem-calc(65); not able to add padding to top as colours over :before arrow up
     padding-bottom: rem-calc(40);
     // increase z-index so that cube rotate doesn't separate triangle from panel
     z-index: 12;
@@ -38,6 +21,7 @@ $triangle-pos-top: -$triangle-border-bottom;
         text-align: center;
     }
 }
+
 .pnl-dark-txt {
     
     h1, h2, h3, h4, p {
@@ -66,12 +50,15 @@ $triangle-pos-top: -$triangle-border-bottom;
         }
     }
 }
+
 .h2-hero {
     padding-top: rem-calc(50);   
 }
+
 .h4-hero {
     padding-top: rem-calc(15);
 }
+
 .hero-continue {
     
     .button {
@@ -81,6 +68,7 @@ $triangle-pos-top: -$triangle-border-bottom;
         background-color: $purple;
     }
 }
+
 
 // *************** 
 // MARKETING PANEL 
@@ -93,8 +81,7 @@ $triangle-pos-top: -$triangle-border-bottom;
     position: relative;
 
     &:before {
-        @extend .triangle-up;
-        border-bottom: $triangle-border-bottom solid $colr-pnl-marketing;
+        @include triangle (38, $colr-pnl-marketing);       
     }
 }
 
@@ -109,8 +96,7 @@ $triangle-pos-top: -$triangle-border-bottom;
     position: relative;
     
     &:before {
-        @extend .triangle-up;
-        border-bottom: $triangle-border-bottom solid $colr-pnl-causes;
+        @include triangle (38, $colr-pnl-causes);
     }
 }
 
@@ -125,14 +111,16 @@ $triangle-pos-top: -$triangle-border-bottom;
     position: relative;
     
     &:before {
-        @extend .triangle-up;
-        border-bottom: $triangle-border-bottom solid $colr-pnl-marketers;
+        @include triangle (38, $colr-pnl-marketers);
     }
 }
 
 // *************** 
 // SUMMARY PANEL 
 // *************** 
+
+$summary-title-height: rem-calc(55);
+$summary-info-height: rem-calc(137);
 
 .pnl-summary, #pnl-summary-colr-to-edge {
     @extend .pnl;
@@ -141,10 +129,104 @@ $triangle-pos-top: -$triangle-border-bottom;
     position: relative;
  
     &:before {
-        @extend .triangle-up;
-        border-bottom: $triangle-border-bottom solid $colr-pnl-summary;
+        @include triangle (38, $colr-pnl-summary);
     }  
 }
+
+.summary-boxes li {
+    
+    position: relative;
+    padding: 0 rem-calc(10);
+    overflow: hidden;
+    margin-bottom: rem-calc(10);
+    
+    .summary-title, .summary-info {
+        position: absolute;  
+        width: calc(100% - #{rem-calc(20)}); //sass interpolation 
+        left: rem-calc(10);
+        text-align: center;
+        background-color: $overlay; 
+        vertical-align: middle;
+        text-size: rem-calc(20);
+    }
+    
+    .summary-title {
+        
+        bottom: rem-calc(-1); // to compensate chrome pixel line
+        height: rem-calc(50);
+        line-height: rem-calc(50);
+        z-index: 20;
+        transition: background-color .5s, color .5s; // fade in at same rate as summary-info slides up - visual effect
+    
+        &:before {
+            @include triangle (12, $overlay);
+            transition: border-bottom-color .5s; // same visual effect on before triangle
+        }
+        
+        // to ensure event is activated via hover on desktop and click on mobile device
+        &:hover,
+        &.click-event{
+            
+            + .summary-info {
+                transform: translateY(0);  // translate next sibling 
+            }  
+        } 
+    }
+    
+    .summary-info {
+        
+        bottom: 0;
+        padding: rem-calc(10);
+        padding-bottom: rem-calc(60); //bottom padding is height of summary title and small triangle 
+        opacity: 0.9;
+        z-index: 10;
+
+        transform: translateY(100%);
+        transition: transform .5s;
+    }
+    
+}
+
+// hover or click summary title to change the colour of the title and the :before psuedo element
+
+.summary-title:hover,
+.summary-title.click-event {
+    
+    color: $overlay; 
+    
+    // li summary panel given background colour so that I may use this to give the summary title the same colour on hover/click
+    // as the image placed in the panel - seemed the best way to extract and apply colour as not able to get colour of img
+    
+    .summary-pink & {
+        background-color: $pink;  
+        &:before {
+            border-bottom-color: $pink;
+        }
+    }
+    
+    .summary-purple & {
+        background-color: $purple;
+        &:before {
+            border-bottom-color: $purple;
+        }
+    }
+    
+    .summary-green & {
+        background-color: $green;
+        &:before {
+            border-bottom-color: $green;
+        }
+    }
+    
+    .summary-mustard & {
+        background-color: $mustard;
+        &:before {
+            border-bottom-color: $mustard;
+        }
+    }
+       
+}
+            
 
 // *************** 
 // TALKABOUT PANEL 
@@ -157,8 +239,7 @@ $triangle-pos-top: -$triangle-border-bottom;
     position: relative;
  
     &:before {
-        @extend .triangle-up;
-        border-bottom: $triangle-border-bottom solid $colr-pnl-talkabout;
+        @include triangle (38, $colr-pnl-talkabout);
     }  
 }
 
@@ -173,8 +254,7 @@ $triangle-pos-top: -$triangle-border-bottom;
     position: relative;
     
     &:before {
-        @extend .triangle-up;
-        border-bottom: $triangle-border-bottom solid $colr-pnl-contactus;
+        @include triangle (38, $colr-pnl-contactus);
     }    
 }
 
@@ -189,8 +269,7 @@ $triangle-pos-top: -$triangle-border-bottom;
     position: relative;
     
     &:before {
-        @extend .triangle-up;
-        border-bottom: $triangle-border-bottom solid $colr-pnl-signup;
+        @include triangle (38, $colr-pnl-signup);
     }    
 }
 

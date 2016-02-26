@@ -17,28 +17,27 @@
 // Site
 // =================
 
-
-
 @import "components/global";
 @import "components/buttons";
 @import "components/carousel";
 @import "components/dropdown";
 @import "components/cubes";
 
-
 @import "layout/footer";
 @import "layout/forms";
 @import "layout/header";
 @import "layout/nav";
+
+@import "utils/functions";
+@import "utils/mixins";
+@import "utils/responsive";
 
 @import "pages/contact";
 @import "pages/home";
 @import "pages/login";
 @import "pages/registration";
 
-@import "utils/functions";
-@import "utils/mixins";
-@import "utils/responsive";
+
 
 
 
