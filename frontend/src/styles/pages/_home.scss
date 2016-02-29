@@ -274,5 +274,23 @@ $summary-info-height: rem-calc(137);
 }
 
 
+.social-tile {
+    min-height: 20em;
+    background-color: $colr-social-tile-bg;
+    position: relative;
+}
+
+
+.social-tile-title {
+    position: absolute;
+    bottom:0;
+    background-color: $colr-social-tile-title;
+    vertical-align: bottom;
+    width: 100%;
+    margin: 0;
+    padding: 1em;
+}
+
+
 
 
