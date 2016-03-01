@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
+    
     <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -31,7 +31,6 @@
 </head>
     
     <body>
-        
         <div class="off-canvas-wrap" data-offcanvas>
     <div class="inner-wrap">
         <div id="pnl-header-colr-to-edge">
@@ -158,15 +157,19 @@
 
 
 
-        
-        
-        <div class="row">
-            <div class="column small-12">
-                <h1>Error Page</h1>
-                <p>This is an error page</p>
-            </div> <!-- end column -->
-        </div> <!-- end row -->
-        
+        <div class="large-12 columns pnl-title pnl-summary">
+            <h1>Log In</h1>
+            <form id="sign-in" method="POST" action="" class="large-4 row">
+                <label for="email">Email:</label>
+                <input type="email" name="email" placeholder="Username" required>
+                <label for="password">Password:</label>
+                <input type="password" name="password" placeholder="Password">
+                <a href="#" class="row">Forgot Password</a>
+                <input class="button right" type="submit" value="Sign in">
+                <a href="create-account.html" class="underline row txt-right">Not Registered? Start here</a>
+            </form>
+
+        </div>
 
         <footer>
     
@@ -179,7 +182,7 @@
         
                 </div> <!-- close inner-wrap for mobile menu -->
     </div> <!-- close off-canvas-wrap for mobile menu -->
-        
+
         <script src="scripts/scripts.js"></script>
 <!--
 <script>
@@ -187,7 +190,8 @@
 </script>
 -->
 
-        
-    </body>
 
+    </body>
 </html>
+
+
