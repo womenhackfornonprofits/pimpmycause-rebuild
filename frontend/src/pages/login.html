@@ -7,16 +7,23 @@
         <!--#include virtual="includes/header.html" -->
         <div class="large-12 columns pnl-title pnl-summary">
             <h1>Log In</h1>
-            <form id="sign-in" method="POST" action="" class="large-4 row">
-                <label for="email">Email:</label>
-                <input type="email" name="email" placeholder="Username" required>
-                <label for="password">Password:</label>
-                <input type="password" name="password" placeholder="Password">
-                <a href="#" class="row">Forgot Password</a>
-                <input class="button right" type="submit" value="Sign in">
-                <a href="create-account.html" class="underline row txt-right">Not Registered? Start here</a>
-            </form>
-
+            <div class="large-3 row">
+                <form id="sign-in" method="POST" action="">
+                    <div class="small-12 large-12 column">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" placeholder="Username" required>
+                    </div>
+                    <div class="small-12 large-12 column">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" placeholder="Password">
+                        <a href="#" class="row">Forgot Password</a>
+                    </div>
+                    <div class="small-12 large-12 column">
+                        <input class="button right" type="submit" value="Sign in">
+                        <a href="create-account.html" class="underline row txt-right">Not Registered? Start here</a>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!--#include virtual="includes/footer.html" -->
