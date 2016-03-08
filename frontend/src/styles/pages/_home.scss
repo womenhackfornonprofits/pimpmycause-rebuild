@@ -289,6 +289,9 @@ $summary-info-height: rem-calc(137);
     width: 100%;
     margin: 0;
     padding: 1em;
+    &:before {
+        @include triangle (16, $colr-social-tile-title);
+    }
 }
 
 

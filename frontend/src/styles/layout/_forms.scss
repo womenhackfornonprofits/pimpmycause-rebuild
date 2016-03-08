@@ -2,6 +2,7 @@
    LAYOUT / FORMS
    ================================= */
 
+
 #sign-in, #sign-up, #contact-us, #newsletter {
 	margin: 0 auto;
 	label {
@@ -15,6 +16,10 @@
 	.txt-right {
 		text-align: right;
 		clear: both;
+	}
+	.button {
+		width: 8.5rem;
+
 	}
 }
 
@@ -35,5 +40,6 @@
 #newsletter {
 	.button {
 		background-color: $colr-btn-newsleter;
+		width: 8.5rem;
 	}
 }
