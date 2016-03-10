@@ -40,4 +40,20 @@ $(window).on("load", function() {
         $(this).toggleClass('click-event');
     });
     
+
+//  *******************************
+//  FEATURED CAUSES/MARKETERS PANEL 
+//  ******************************* 
+        
+// Fade Responsive Slider
+    
+    $('.fade').slick({
+      arrows: false,
+      dots: true,
+      infinite: true,
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+    
 });

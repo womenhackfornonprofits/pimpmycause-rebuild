@@ -12,16 +12,12 @@
 // =================
 
 @import "vendors/foundation";
+@import "vendors/slick";
+@import "vendors/slick-theme";
 
 // =================
 // Site
 // =================
-
-@import "components/global";
-@import "components/buttons";
-@import "components/carousel";
-@import "components/dropdown";
-@import "components/cubes";
 
 @import "layout/footer";
 @import "layout/forms";
@@ -32,8 +28,14 @@
 @import "utils/mixins";
 @import "utils/responsive";
 
-@import "pages/contact";
+@import "components/global";
+@import "components/buttons";
+@import "components/slider";
+@import "components/dropdown";
+@import "components/cubes";
+
 @import "pages/home";
+@import "pages/contact";
 @import "pages/login";
 @import "pages/registration";
 
