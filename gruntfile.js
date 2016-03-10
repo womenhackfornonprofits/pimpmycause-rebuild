@@ -222,7 +222,7 @@ module.exports = function (grunt) {
         
         'gh-pages': {
             options: {
-                base: '../dist'
+                base: 'frontend/dist'
                 // repo: 'https://github.com/rimpey/whfnp-pimp.git'
             },
             src: ['**']
