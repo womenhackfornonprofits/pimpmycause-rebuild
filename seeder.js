@@ -1,5 +1,5 @@
 // this is the same as running `use pimpmycausedb` from the shell
-var db = db.getSiblingDB('pimpmycausedb');
+var db = db.getSiblingDB('pimp_my_cause');
 
 // delete any data that was already there
 db.dropDatabase();
