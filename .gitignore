@@ -45,3 +45,6 @@ nodemon.json
 
 /log
 /*.log
+
+config.json
+config.js
