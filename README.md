@@ -20,11 +20,22 @@ First you will need to install [NPM](https://nodejs.org/) to manage packages
 For more information about installing PencilBlue please visit the [wiki](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation).
 
 ## Running on your local machine
-To run the project on your local machine:
+To run the project on your local machine in the terminal:
+`mongod` 
+Then in a new terminal tab (or a new terminal on windows) run:
+`nodemon main`
 
-`pbctrl start` 
+This will connect the application to your local mongo instance and will start the PencilBlue CMS. You will then be able to view it in your browser on [`http://localhost:8080/`](http://localhost:8080/)
 
-To start the PencilBlue CMS and you will be able to view in your browser [`http://localhost:8080/`](http://localhost:8080/)
+## Seeding your local database
+To add data to your local mongo 'pimp_my_cause' database, you will first need to make sure that 'mongod' is running, then in a new tab of the terminal follow the steps:
+1)  mongo
+2)  use pimp_my_cause
+3)  load('./seeder.js')
+you should get 'ture' if there are no errors
+4)  db.getCollectionNames()
+You should get a list of all the collections in the 'pimp_my_cause' database.
+*Note*: You will need to go through these steps only when you want to reset your local 'pimp_my_cause' database. There is no need to run this eveytime you are working on the project.
 
 ## Technology Stack
 | Backend       | Frontend          | 
