@@ -1,4 +1,4 @@
-// this is the same as running `use pimpmycausedb` from the shell
+// this is the same as running `use pimp_my_cause` from the shell
 var db = db.getSiblingDB('pimp_my_cause');
 
 // delete any data that was already there
