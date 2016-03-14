@@ -25,3 +25,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+
+@mixin readmore {
+    font-size: rem-calc(18);
+    font-family: 'Open Sans';
+    font-weight: normal;
+    color: $colr-readmore;    
+}

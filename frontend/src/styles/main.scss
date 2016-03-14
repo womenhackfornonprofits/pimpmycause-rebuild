@@ -26,18 +26,19 @@
 
 @import "utils/functions";
 @import "utils/mixins";
-@import "utils/responsive";
 
 @import "components/global";
 @import "components/buttons";
 @import "components/slider";
 @import "components/dropdown";
 @import "components/cubes";
+@import "components/twitter";
 
 @import "pages/home";
 @import "pages/contact";
 @import "pages/login";
 @import "pages/registration";
+@import "utils/responsive";
 
 
 

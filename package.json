@@ -89,6 +89,8 @@
     "mocha-lcov-reporter": "0.0.1",
     "pixrem": "^3.0.0",
     "rucksack-css": "^0.8.5",
-    "should": "5.0.1"
+    "should": "5.0.1",
+    "slick-carousel": "^1.5.9"
+    
   }
 }

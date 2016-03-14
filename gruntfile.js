@@ -1,6 +1,9 @@
-module.exports = function (grunt) {
+// gruntfile.js
 
+module.exports = function(grunt) {
+	
 	grunt.initConfig({
+        
 		pkg: require('./package.json'),
 		meta: {
 			banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -122,6 +125,7 @@ module.exports = function (grunt) {
 					'frontend/src/scripts/vendors/jquery.placeholder.js',
 					'frontend/src/scripts/vendors/jquery.easing.js',
 					'frontend/src/scripts/vendors/foundation.js',
+					'frontend/src/scripts/vendors/foundation.equalizer.js',
 					'frontend/src/scripts/vendors/slick.js',
 					'frontend/src/scripts/scripts.js'
 				],
@@ -148,6 +152,7 @@ module.exports = function (grunt) {
 						'frontend/src/scripts/vendors/jquery.placeholder.js',
 						'frontend/src/scripts/vendors/jquery.easing.js',
 						'frontend/src/scripts/vendors/foundation.js',
+						'frontend/src/scripts/vendors/foundation.equalizer.js',
 						'frontend/src/scripts/vendors/slick.js',
 						'frontend/src/scripts/scripts.js'
 					]
@@ -245,10 +250,10 @@ module.exports = function (grunt) {
     	grunt.loadNpmTasks('grunt-gh-pages');
 
 
-	// include call to sass/ssi separately for first time run thereafter called via watch
-	grunt.registerTask('default', ['sass:dev', 'ssi', 'postcss', 'concat', 'imagemin', 'browserSync', 'watch']);
-	// run grunt deploy for a distribution ready product
-	grunt.registerTask('deploy', ['clean', 'sass:deploy', 'ssi', 'postcss', 'uglify', 'imagemin', 'gh-pages']);
-	grunt.registerTask('backend', ['mocha_istanbul']);
+    // include call to sass/ssi separately for first time run thereafter called via watch
+	grunt.registerTask('default', ['sass:dev', 'ssi', 'postcss', 'concat', 'imagemin', 'copy:fonts', 'browserSync', 'watch']);
+    // run grunt deploy for a distribution ready product
+    grunt.registerTask('deploy', ['clean', 'sass:deploy', 'ssi', 'postcss', 'uglify', 'imagemin', 'copy:fonts', 'gh-pages']);
+    grunt.registerTask('backend', ['mocha_istanbul']);
 
 };
