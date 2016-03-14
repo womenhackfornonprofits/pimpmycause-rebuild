@@ -1,6 +1,9 @@
-module.exports = function (grunt) {
+// gruntfile.js
 
+module.exports = function(grunt) {
+	
 	grunt.initConfig({
+        
 		pkg: require('./package.json'),
 		meta: {
 			banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -33,6 +36,10 @@ module.exports = function (grunt) {
 			watch_js: {
 				files: ['frontend/src/scripts/**/*.js'],
 				tasks: ['uglify']
+			},
+            		watch_img: {
+				files: ['frontend/src/img/**/*'],
+				tasks: ['imagemin']
 			}
 		},
 
@@ -118,6 +125,8 @@ module.exports = function (grunt) {
 					'frontend/src/scripts/vendors/jquery.placeholder.js',
 					'frontend/src/scripts/vendors/jquery.easing.js',
 					'frontend/src/scripts/vendors/foundation.js',
+					'frontend/src/scripts/vendors/foundation.equalizer.js',
+					'frontend/src/scripts/vendors/slick.js',
 					'frontend/src/scripts/scripts.js'
 				],
 				dest: 'frontend/dist/scripts/scripts.js',
@@ -143,6 +152,8 @@ module.exports = function (grunt) {
 						'frontend/src/scripts/vendors/jquery.placeholder.js',
 						'frontend/src/scripts/vendors/jquery.easing.js',
 						'frontend/src/scripts/vendors/foundation.js',
+						'frontend/src/scripts/vendors/foundation.equalizer.js',
+						'frontend/src/scripts/vendors/slick.js',
 						'frontend/src/scripts/scripts.js'
 					]
 				}
@@ -171,80 +182,78 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+        
+        
+        // Minify images in production
+        
+         imagemin: {
+              dist: {
+                options: {
+                  optimizationLevel: 3
+                },
+                files: [
+                  {
+                    expand: true,
+                    cwd: 'frontend/src/img/',
+                    src: ['*.{png,jpg,gif}'],
+                    dest: 'frontend/dist/img'
+                  }
+                ]
+              }
+        },
+        
+        
+        // Copy fonts to distribution directory
+        
+        copy: {
+            fonts: {
+                files: [
+                  {
+                    expand: true,
+                    cwd: 'frontend/src/fonts/',
+                    src: ['**'],
+                    dest: 'frontend/dist/fonts'
+                  }
+                ]    
+            }
+        },
+        
+        
+        // GitHub pages generates a live site from a git repo
+        // Running this task with grunt will create a temporary clone of the current repository, 
+        // create a gh-pages branch if one doesn't already exist, copy over all files from the 
+        // dist directory that match patterns from thesrc configuration, commit all changes, 
+        // and push to the origin remote.
+        
+        'gh-pages': {
+            options: {
+                base: 'frontend/dist'
+                // repo: 'https://github.com/rimpey/whfnp-pimp.git'
+            },
+            src: ['**']
+        }
 
-
-		// Minify images in production
-
-		imagemin: {
-			dist: {
-				options: {
-					optimizationLevel: 3
-				},
-				files: [
-					{
-						expand: true,
-						cwd: 'frontend/src/img/',
-						src: ['*.{png,jpg,gif}'],
-						dest: 'frontend/dist/img'
-					}
-				]
-			}
-		},
-
-
-		// GitHub pages generates a live site from a git repo
-		// Running this task with grunt will create a temporary clone of the current repository,
-		// create a gh-pages branch if one doesn't already exist, copy over all files from the
-		// dist directory that match patterns from thesrc configuration, commit all changes,
-		// and push to the origin remote.
-
-		'gh-pages': {
-			options: {
-				base: 'frontend/dist'
-			},
-			src: ['**']
-		},
-
-		// TODO - add src file path
-		jshint: {
-			all: ['']
-		},
-		mocha_istanbul: {
-			target: {
-				src: 'tests'
-			}
-		},
-		coveralls: {
-			options: {
-				src: 'coverage/lcov.info',
-				force: false
-			},
-			your_target: {
-				src: 'coverage/extra-results-*.info'
-			},
-		},
 	});
 
 	// Dependent plug-ins
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-ssi');
 	grunt.loadNpmTasks('grunt-postcss');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-imagemin');
-	grunt.loadNpmTasks('grunt-gh-pages');
-	grunt.loadNpmTasks('grunt-mocha-istanbul');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-coveralls');
+    	grunt.loadNpmTasks('grunt-contrib-imagemin');
+    	grunt.loadNpmTasks('grunt-contrib-copy');
+    	grunt.loadNpmTasks('grunt-gh-pages');
 
-	// include call to sass/ssi separately for first time run thereafter called via watch
-	grunt.registerTask('default', ['sass:dev', 'ssi', 'postcss', 'concat', 'imagemin', 'browserSync', 'watch']);
-	// run grunt deploy for a distribution ready product
-	grunt.registerTask('deploy', ['clean', 'sass:deploy', 'ssi', 'postcss', 'uglify', 'imagemin', 'gh-pages']);
-	grunt.registerTask('backend', ['mocha_istanbul']);
+
+    // include call to sass/ssi separately for first time run thereafter called via watch
+	grunt.registerTask('default', ['sass:dev', 'ssi', 'postcss', 'concat', 'imagemin', 'copy:fonts', 'browserSync', 'watch']);
+    // run grunt deploy for a distribution ready product
+    grunt.registerTask('deploy', ['clean', 'sass:deploy', 'ssi', 'postcss', 'uglify', 'imagemin', 'copy:fonts', 'gh-pages']);
+    grunt.registerTask('backend', ['mocha_istanbul']);
 
 };
