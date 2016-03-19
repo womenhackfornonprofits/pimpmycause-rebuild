@@ -140,7 +140,7 @@ module.exports = function Routes(pb) {
 			method: 'post',
 			path: "/actions/user/sign_up",
 			auth_required: false,
-			controller: path.join(pb.config.docRoot, 'plugins', 'pencilblue', 'controllers', 'actions', 'user', 'sign_up.js'),
+			controller: path.join(pb.config.docRoot, 'plugins', 'pencilblue', 'controllers', 'actions', 'user', 'registration.js'),
 		},
 		{
 			method: 'get',
@@ -166,7 +166,7 @@ module.exports = function Routes(pb) {
 			method: 'get',
 			path: "/user/sign_up",
 			auth_required: false,
-			controller: path.join(pb.config.docRoot, 'plugins', 'pencilblue', 'controllers', 'user', 'sign_up.js'),
+			controller: path.join(pb.config.docRoot, 'plugins', 'pencilblue', 'controllers', 'user', 'registration.js'),
 		},
 		{
 			method: 'get',
