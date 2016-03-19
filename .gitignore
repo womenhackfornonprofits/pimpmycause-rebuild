@@ -48,3 +48,9 @@ nodemon.json
 
 config.json
 config.js
+
+
+### INTELLIJ STUFF ###
+/.idea
+pom.xml
+project.iml
