@@ -90,7 +90,7 @@
     "pixrem": "^3.0.0",
     "rucksack-css": "^0.8.5",
     "should": "5.0.1",
-    "slick-carousel": "^1.5.9"
-    
+    "slick-carousel": "^1.5.9",
+    "validator": "^5.1.0"
   }
 }
