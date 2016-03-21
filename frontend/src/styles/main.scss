@@ -12,6 +12,7 @@
 // =================
 
 @import "vendors/foundation";
+@import "vendors/selectBox";
 @import "vendors/slick";
 @import "vendors/slick-theme";
 
@@ -29,8 +30,8 @@
 
 @import "components/global";
 @import "components/buttons";
-@import "components/slider";
 @import "components/dropdown";
+@import "components/slider";
 @import "components/cubes";
 @import "components/twitter";
 
