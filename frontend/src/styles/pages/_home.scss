@@ -35,6 +35,8 @@
 // HERO PANEL 
 // ********** 
 
+// NOTE: more styling in dropdown and buttons
+
 .pnl-hero, #pnl-hero-colr-to-edge {
     background-color: $colr-pnl-hero;
     
@@ -52,21 +54,37 @@
 }
 
 .h2-hero {
-    padding-top: rem-calc(50);   
+    
+    h2 {
+        font-family: $lato;
+        font-size: rem-calc(42);
+        font-weight: lighter;
+        padding-top: rem-calc(25);    
+    }  
 }
 
 .h4-hero {
-    padding-top: rem-calc(15);
+    
+    h4 {
+        font-family: $lato;
+        font-size: rem-calc(24);
+        padding-top: rem-calc(10);
+        padding-bottom: rem-calc(25);
+    }
 }
 
-.hero-continue {
+.h4-hero-socialregister {
     
-    .button {
-        padding: 0.5rem 1.75rem 0.8125rem 1.75rem; 
-        width: 12rem;
-        font-size: rem-calc(24);
-        background-color: $purple;
-    }
+    h4 {
+        
+        font-family: $lato;
+        font-size: rem-calc(21);
+        padding-top: rem-calc(25);
+        
+        a {
+            padding-left: rem-calc(12);
+        }
+    }   
 }
 
 
@@ -93,13 +111,14 @@
 // CAUSES PANEL 
 // *************** 
 
+// NOTE: more styling in slider
+
 .pnl-causes, #pnl-causes-colr-to-edge {
     @extend .pnl;
     @extend .pnl-light-txt;
     background-color: $colr-pnl-causes;
     position: relative;
-    
-    // more styling in slider.scss
+ 
     
     &:before {
         @include triangle (38, $colr-pnl-causes);
@@ -109,6 +128,8 @@
 // *************** 
 // MARKETERS PANEL 
 // *************** 
+
+// NOTE: more styling in slider
 
 .pnl-marketers, #pnl-marketers-colr-to-edge {
     @extend .pnl;
@@ -192,6 +213,13 @@ $summary-info-height: rem-calc(137);
         transform: translateY(100%);
         transition: transform .5s;
         
+        // to ensure event is activated via hover on desktop and click on mobile device
+        &:hover,
+        &.click-event{
+            
+            transform: translateY(0);  // translate next sibling 
+        } 
+        
         .read-more {
             @include readmore;
         }
@@ -269,7 +297,7 @@ $social-title-height: rem-calc(74);
     
         .news-heading {
             font-size: rem-calc(30);
-            font-family: 'Open Sans';
+            font-family: $open-sans;
             font-weight: lighter;
             padding-top: rem-calc(5);
             padding-bottom: rem-calc(5);  
@@ -278,7 +306,7 @@ $social-title-height: rem-calc(74);
 
         .news-info {
             font-size: rem-calc(18);
-            font-family: 'Open Sans';
+            font-family: $open-sans;
             color: $colr-slider-text;
             
             

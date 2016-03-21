@@ -123,6 +123,7 @@ module.exports = function(grunt) {
 					'frontend/src/scripts/vendors/fastclick.js',
 					'frontend/src/scripts/vendors/jquery.cookie.js',
 					'frontend/src/scripts/vendors/jquery.placeholder.js',
+					'frontend/src/scripts/vendors/jquery.selectBox.js',
 					'frontend/src/scripts/vendors/jquery.easing.js',
 					'frontend/src/scripts/vendors/foundation.js',
 					'frontend/src/scripts/vendors/foundation.equalizer.js',
@@ -150,6 +151,7 @@ module.exports = function(grunt) {
 						'frontend/src/scripts/vendors/fastclick.js',
 						'frontend/src/scripts/vendors/jquery.cookie.js',
 						'frontend/src/scripts/vendors/jquery.placeholder.js',
+						'frontend/src/scripts/vendors/jquery.selectBox.js',
 						'frontend/src/scripts/vendors/jquery.easing.js',
 						'frontend/src/scripts/vendors/foundation.js',
 						'frontend/src/scripts/vendors/foundation.equalizer.js',
@@ -228,7 +230,6 @@ module.exports = function(grunt) {
         'gh-pages': {
             options: {
                 base: 'frontend/dist'
-                // repo: 'https://github.com/rimpey/whfnp-pimp.git'
             },
             src: ['**']
         }

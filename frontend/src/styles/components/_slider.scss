@@ -15,7 +15,7 @@
             
         .cause-title {
             font-size: rem-calc(42);
-            font-family: 'Open Sans';
+            font-family: $open-sans;
             font-weight: lighter;
             padding-top: rem-calc(25);
             padding-bottom: rem-calc(15);
@@ -24,7 +24,7 @@
 
         .cause-desc {
             font-size: rem-calc(18);
-            font-family: 'Open Sans';
+            font-family: $open-sans;
             font-weight: lighter;
             color: $colr-slider-text;
         }
@@ -97,7 +97,7 @@
         
         .marketer-name {
             font-size: rem-calc(42);
-            font-family: 'Open Sans';
+            font-family: $open-sans;
             font-weight: lighter;
             padding-top: rem-calc(25);
             padding-bottom: rem-calc(5);  
@@ -106,7 +106,7 @@
         
         .marketer-title {
             font-size: rem-calc(18);
-            font-family: 'Open Sans';
+            font-family: $open-sans;
             font-weight: normal;
             color: $pink;
             padding-bottom: rem-calc(15); 
@@ -114,7 +114,7 @@
 
         .marketer-desc {
             font-size: rem-calc(18);
-            font-family: 'Open Sans';
+            font-family: $open-sans;
             font-weight: lighter;
             color: $colr-slider-text;
         }
