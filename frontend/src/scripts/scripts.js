@@ -1,3 +1,7 @@
+$('select').selectBox({
+    keepInViewport: false
+});
+
 $(document).foundation();
 
 $(window).on("load", function() {
