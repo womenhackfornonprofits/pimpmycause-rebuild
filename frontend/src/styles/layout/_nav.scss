@@ -15,6 +15,12 @@
 //    }
 //}
 
+// solve issue of cube overlapping menu 
+.top-bar {
+    
+    z-index: 20; // submenu on cube flip up is hidden
+}
+
 .dropdown, .top-bar-section, .off-canvas-list {
     ul li {
             a {

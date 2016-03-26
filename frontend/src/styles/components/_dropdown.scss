@@ -1,3 +1,97 @@
 /* =================================
    COMPONENTS / DROPDOWN
    ================================= */
+
+
+// HERO PANEL
+
+$dropdown-height: rem-calc(54);
+//$dropdown-maxwidth: rem-calc(342); // use rows and columns to do
+
+
+// standard drop down behind styled drop down - hide
+// for some reason the hide can only work using an id
+// hence had to use classes per drop down to toggle arrow image rather than preferred id
+#standard-dropdown {
+    
+    visibility: hidden;
+//     display: none; // takes dropdown out of the DOM page reshuffles   
+}
+
+// dropdown box
+.selectBox-dropdown {
+    
+    height: $dropdown-height;
+    color: $colr-dropdown-txt;
+    margin-top: rem-calc(12);
+    border: solid 1px $colr-dropdown-border;
+    background-color: $colr-dropdown-background;
+    box-shadow: 2.5px 4.33px 13px 0px rgba(0, 0, 0, 0.08);
+    width: auto !important;
+    display: block !important;
+    
+    .selectBox-label {
+     
+        line-height: $dropdown-height;
+        font-family: $lato; // variable in typography
+        font-size: rem-calc(25);
+        width: 90% !important;
+        
+        &:hover {
+            color: $colr-dropdown-txt;
+        }
+    }
+    
+    .selectBox-arrow {
+        background: url(../img/arrow-pink-down.gif) 50% center no-repeat;
+        border-left: none;
+
+    }
+    
+    // target parent when submenu item is triggered
+    &.selectBox-menuShowing {
+        
+        .selectBox-arrow {
+            background: url(../img/arrow-pink-up.gif) 50% center no-repeat;    
+        }  
+    }
+
+    
+    &:focus, &:hover {
+        color: $colr-dropdown-txt;  
+    }
+}
+
+// list item
+.selectBox-dropdown-menu {
+    
+    background-color: $colr-dropdown-background;
+}
+
+.selectBox-options {
+        
+    li {
+        
+        &.selectBox-selected {
+            a {
+                background-color: $colr-dropdown-txt-selected !important;
+            }
+        }
+        
+        a {
+            color: $colr-dropdown-txt;
+            font-size: rem-calc(18);
+            line-height: rem-calc(29);
+            
+            &:hover {
+                font-weight: bolder;
+                font-size: rem-calc(19);
+                background-color: $colr-dropdown-background; 
+            }
+        }   
+    }
+}
+
+
+
+

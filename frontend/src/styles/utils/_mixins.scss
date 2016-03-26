@@ -29,7 +29,7 @@
 
 @mixin readmore {
     font-size: rem-calc(18);
-    font-family: 'Open Sans';
+    font-family: $open-sans;
     font-weight: normal;
     color: $colr-readmore;    
 }

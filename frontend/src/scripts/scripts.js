@@ -1,3 +1,7 @@
+$('select').selectBox({
+    keepInViewport: false
+});
+
 $(document).foundation();
 
 $(window).on("load", function() {
@@ -7,7 +11,12 @@ $(window).on("load", function() {
 //  HERO PANEL 
 //  ********** 
     
-//  rotating the cubes on the front hero panel using a timer
+// LHS - Register - Join for Free
+    
+    // hide first item in select - duplicate
+    $(".selectBox-dropdown-menu").find("li:first-child").remove();
+    
+    // rotating the cubes on the front hero panel using a timer
     
     var loop_condition = true;
     
@@ -37,6 +46,10 @@ $(window).on("load", function() {
 //  toggle click-event class to element to perform slide up functionality displaying summary info on click
       
     $('.summary-title').on('click', function () {
+        $(this).toggleClass('click-event');
+    });
+    
+    $('.summary-info').on('click', function () {
         $(this).toggleClass('click-event');
     });
     
