@@ -21,7 +21,8 @@ For more information about installing PencilBlue please visit the [wiki](https:/
 ## Running the project on your local machine
 0. Clone the repo: `git clone git@github.com:womenhackfornonprofits/pimpmycause-rebuild.git`
 1. Make sure your local mongo is up and running by running: `mongod`
-2. In a new terminal tab (or a new terminal on windows) `cd` into the repo and run: `npm install` (you migth need to use `sudo`)
+2. In a new terminal tab (or a new terminal on windows) `cd` into the repo and run:
+   `npm install` (you might need to use `sudo`)
 3. `bower install`
 4. `grunt`
 5. `nodemon main`
@@ -31,13 +32,14 @@ This will connect the application to your local mongo instance and will start th
 
 ## Seeding your local database
 To add data to your local mongo 'pimp_my_cause' database, you will first need to make sure that 'mongod' is running, then in a new tab of the terminal follow the steps:
-1.  mongo
-2.  use pimp_my_cause
-3.  load('./seeder.js')
-you should get 'ture' if there are no errors
-4.  db.getCollectionNames()
+1. `mongo`
+2. `use pimp_my_cause`
+3. `load('./seeder.js')`
+you should get `ture` if there are no errors
+4.  `db.getCollectionNames()`
 You should get a list of all the collections in the 'pimp_my_cause' database.
-*Note*: You will need to go through these steps only when you want to reset your local 'pimp_my_cause' database. There is no need to run this eveytime you are working on the project.
+*Note*: You will need to go through these steps only when you want to reset your local
+'pimp_my_cause' database. There is no need to run this every time you are working on the project.
 
 ## Technology Stack
 | Backend       | Frontend          |
