@@ -31,15 +31,17 @@ This will connect the application to your local mongo instance and will start th
 
 
 ## Seeding your local database
-To add data to your local mongo 'pimp_my_cause' database, you will first need to make sure that 'mongod' is running, then in a new tab of the terminal follow the steps:
+To add data to your local mongo 'pimp_my_cause' database,
+you will first need to make sure that 'mongod' is running,
+then in a new tab of the terminal follow the steps:
 1. `mongo`
 2. `use pimp_my_cause`
-3. `load('./seeder.js')`
-you should get `ture` if there are no errors
-4.  `db.getCollectionNames()`
+3. `load('./seeder.js')` you should get `ture` if there are no errors
+4. `db.getCollectionNames()`
 You should get a list of all the collections in the 'pimp_my_cause' database.
 *Note*: You will need to go through these steps only when you want to reset your local
 'pimp_my_cause' database. There is no need to run this every time you are working on the project.
+
 
 ## Technology Stack
 | Backend       | Frontend          |
