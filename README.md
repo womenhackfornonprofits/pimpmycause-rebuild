@@ -16,9 +16,6 @@ Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by 
 
 *Notes*: you might need to use `sudo`.
 
-For Mac users it is recommended to install npm via [Homebrew](https://github.com/Homebrew/install).
-Please make sure your Homebrew is up-to-date and healthy (`brew doctor`) before running `npm install`.
-
 ## Running on your local machine
 To run the project on your local machine in the terminal:
 `mongod` 
