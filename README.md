@@ -25,8 +25,8 @@ For more information about installing PencilBlue please visit the [wiki](https:/
 2. In a new terminal tab (or a new terminal on windows) `cd` into the repo and run:
    `npm install` (you might need to use `sudo`)
 3. `bower install`
-4. `grunt`
-5. `nodemon main`
+4. `grunt` (for Frontend Developers)
+4. `nodemon main`(for Backend Developers)
 
 This will connect the application to your local mongo instance and will start the PencilBlue CMS. You will then be able to view it in your browser on [`http://localhost:8080/`](http://localhost:8080/)
 
