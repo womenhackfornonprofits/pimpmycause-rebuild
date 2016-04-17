@@ -10,9 +10,9 @@ Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by 
 2. Install [NPM](https://nodejs.org/) to manage packages.
 3. Run `npm install` this will install all packages and the [Pencil Blue CMS](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation) CLI in the `package.json` file.
 4. Install [Grunt](http://gruntjs.com/getting-started)
-5, Install [Homebrew](https://github.com/Homebrew/install), if you have it already make sure it is up to date with `brew doctor`
-5. Install [MongoDB](https://docs.mongodb.org/manual/installation/) with `brew install mongodb`. 
-6. Create the DB folder mongo needs to use `mkdir -p /data/db`
+5. Install [Homebrew](https://github.com/Homebrew/install), if you have it already make sure it is up to date with `brew doctor`
+6. Install [MongoDB](https://docs.mongodb.org/manual/installation/) with `brew install mongodb`. 
+7. Create the DB folder mongo needs to use `mkdir -p /data/db`
 
 *Notes*: you might need to use `sudo`.
 
