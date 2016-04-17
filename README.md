@@ -14,30 +14,49 @@ Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by 
 5. Install [MongoDB](https://docs.mongodb.org/manual/installation/) with `brew install mongodb`. 
 6. Create the DB folder mongo needs to use `mkdir -p /data/db`
 
-*Note*: you might need to use `sudo`.
+*Notes*: you might need to use `sudo`.
 
+For Mac users it is recommended to install npm via [Homebrew](https://github.com/Homebrew/install).
+Please make sure your Homebrew is up-to-date and healthy (`brew doctor`) before running `npm install`.
+
+<<<<<<< HEAD
 ## Running on your local machine
 To run the project on your local machine in the terminal:
 `mongod` 
 Then in a new terminal tab (or a new terminal on windows) run:
 `nodemon main`
+=======
+For more information about installing PencilBlue please visit the [wiki](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation).
+
+## Running the project on your local machine
+0. Clone the repo: `git clone git@github.com:womenhackfornonprofits/pimpmycause-rebuild.git`
+1. Make sure your local mongo is up and running by running: `mongod`
+2. In a new terminal tab (or a new terminal on windows) `cd` into the repo and run:
+   `npm install` (you might need to use `sudo`)
+3. `bower install`
+4. `grunt` (for Frontend Developers)
+4. `nodemon main`(for Backend Developers)
+>>>>>>> bb96a7c30b8cd10fc49888d7df052742b0568def
 
 This will connect the application to your local mongo instance and will start the PencilBlue CMS. You will then be able to view it in your browser on [`http://localhost:8080/`](http://localhost:8080/)
 
+
 ## Seeding your local database
-To add data to your local mongo 'pimp_my_cause' database, you will first need to make sure that 'mongod' is running, then in a new tab of the terminal follow the steps:
-1)  mongo
-2)  use pimp_my_cause
-3)  load('./seeder.js')
-you should get 'ture' if there are no errors
-4)  db.getCollectionNames()
+1. `mongo`
+Then in a new tab of the terminal follow the steps:
+2. `use pimp_my_cause`
+3. `load('./seeder.js')` you should get `ture` if there are no errors
+4. `db.getCollectionNames()`
 You should get a list of all the collections in the 'pimp_my_cause' database.
-*Note*: You will need to go through these steps only when you want to reset your local 'pimp_my_cause' database. There is no need to run this eveytime you are working on the project.
+
+*Note*: You will need to go through these steps only when you want to reset your local
+'pimp_my_cause' database. There is no need to run this every time you are working on the project.
+
 
 ## Technology Stack
-| Backend       | Frontend          | 
-| ------------- |:-----------------:| 
-| Node.js       | HTML              | 
+| Backend       | Frontend          |
+| ------------- |:-----------------:|
+| Node.js       | HTML              |
 | MongoDB       | CSS               |  
 
 ## Continuous Integration, Code Coverage and Unit Tests
