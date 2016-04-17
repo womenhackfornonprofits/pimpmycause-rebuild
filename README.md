@@ -6,18 +6,14 @@
 Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by [Women Hack For Non Profits](womenhackfornonprofits.com)
 
 ## Set Up
-1. Install NPM
-First you will need to install [NPM](https://nodejs.org/) to manage packages 
-2. Install [Grunt](http://gruntjs.com/getting-started)
-3. Clone the repo: 
-`git clone git@github.com:womenhackfornonprofits/pimpmycause-rebuild.git`
-4. Install [Bower](http://bower.io/#install-bower)
-5. Install PencilBlue command line interface tools:
-`npm install -g pencilblue-cli`
+1. Clone the repo: `git clone git@github.com:womenhackfornonprofits/pimpmycause-rebuild.git`
+2. Install [NPM](https://nodejs.org/) to manage packages.
+3. Run `npm install` this will install all packages and the [Pencil Blue CMS](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation) CLI in the `package.json` file.
+4. Install [Grunt](http://gruntjs.com/getting-started)
+5, Install [Homebrew](https://github.com/Homebrew/install), if you have it already make sure it is up to date with `brew doctor`
+5. Install [MongoDB](https://docs.mongodb.org/manual/installation/) with `brew install mongodb`. 
 
 *Note*: you might need to use `sudo`.
-
-For more information about installing PencilBlue please visit the [wiki](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation).
 
 ## Running on your local machine
 To run the project on your local machine in the terminal:
