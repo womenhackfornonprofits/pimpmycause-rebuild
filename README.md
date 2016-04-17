@@ -19,11 +19,14 @@ Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by 
 For Mac users it is recommended to install npm via [Homebrew](https://github.com/Homebrew/install).
 Please make sure your Homebrew is up-to-date and healthy (`brew doctor`) before running `npm install`.
 
-## Running on your local machine
-To run the project on your local machine in the terminal:
-`mongod` 
-Then in a new terminal tab (or a new terminal on windows) run:
-`nodemon main`
+## Running the project on your local machine
+0. Clone the repo: `git clone git@github.com:womenhackfornonprofits/pimpmycause-rebuild.git`
+1. Make sure your local mongo is up and running by running: `mongod`
+2. In a new terminal tab (or a new terminal on windows) `cd` into the repo and run:
+   `npm install` (you might need to use `sudo`)
+3. `bower install`
+4. `grunt` (for Frontend Developers)
+4. `nodemon main`(for Backend Developers)
 
 This will connect the application to your local mongo instance and will start the PencilBlue CMS. You will then be able to view it in your browser on [`http://localhost:8080/`](http://localhost:8080/)
 
