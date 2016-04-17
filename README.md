@@ -11,22 +11,19 @@ Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by 
 3. Run `npm install` this will install all packages and the [Pencil Blue CMS](https://github.com/pencilblue/pencilblue/wiki/Quickstart:-Installation) CLI in the `package.json` file.
 4. Install [Grunt](http://gruntjs.com/getting-started)
 5. Install [Homebrew](https://github.com/Homebrew/install), if you have it already make sure it is up to date with `brew doctor`
-6. Install [MongoDB](https://docs.mongodb.org/manual/installation/) with `brew install mongodb`. 
-7. Create the DB folder mongo needs to use `mkdir -p /data/db`
+5. Install [MongoDB](https://docs.mongodb.org/manual/installation/) with `brew install mongodb`. 
+6. Create the DB folder mongo needs to use `mkdir -p /data/db`
 
 *Notes*: you might need to use `sudo`.
 
 For Mac users it is recommended to install npm via [Homebrew](https://github.com/Homebrew/install).
 Please make sure your Homebrew is up-to-date and healthy (`brew doctor`) before running `npm install`.
 
-## Running the project on your local machine
-0. Clone the repo: `git clone git@github.com:womenhackfornonprofits/pimpmycause-rebuild.git`
-1. Make sure your local mongo is up and running by running: `mongod`
-2. In a new terminal tab (or a new terminal on windows) `cd` into the repo and run:
-   `npm install` (you might need to use `sudo`)
-3. `bower install`
-4. `grunt` (for Frontend Developers)
-4. `nodemon main`(for Backend Developers)
+## Running on your local machine
+To run the project on your local machine in the terminal:
+`mongod` 
+Then in a new terminal tab (or a new terminal on windows) run:
+`nodemon main`
 
 This will connect the application to your local mongo instance and will start the PencilBlue CMS. You will then be able to view it in your browser on [`http://localhost:8080/`](http://localhost:8080/)
 
