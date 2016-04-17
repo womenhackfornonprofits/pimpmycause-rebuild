@@ -17,9 +17,7 @@ $(window).on("load", function() {
     $(".selectBox-dropdown-menu").find("li:first-child").remove();
     
     // rotating the cubes on the front hero panel using a timer
-    
-    var loop_condition = true;
-    
+        
     var topLeft = $(".cube").eq(0);
     var topRight = $(".cube").eq(1);
     var bottomLeft = $(".cube").eq(2);
@@ -27,14 +25,10 @@ $(window).on("load", function() {
     
     setInterval(function () {
         
-        if (loop_condition) {
-            topLeft.toggleClass("active");
-            bottomRight.toggleClass("active");
-        } else {
-            topRight.toggleClass("active");
-            bottomLeft.toggleClass("active");
-        }
-        loop_condition = !loop_condition;
+        topLeft.toggleClass("active");
+        bottomRight.toggleClass("active");
+        topRight.toggleClass("active");
+        bottomLeft.toggleClass("active");
 
     }, 2000);
     
