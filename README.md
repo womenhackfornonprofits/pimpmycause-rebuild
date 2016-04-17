@@ -12,6 +12,7 @@ Rebuild of the [Pimp My Cause](http://www.pimpmycause.org/) website. Powered by 
 4. Install [Grunt](http://gruntjs.com/getting-started)
 5, Install [Homebrew](https://github.com/Homebrew/install), if you have it already make sure it is up to date with `brew doctor`
 5. Install [MongoDB](https://docs.mongodb.org/manual/installation/) with `brew install mongodb`. 
+6. Create the DB folder mongo needs to use `mkdir -p /data/db`
 
 *Note*: you might need to use `sudo`.
 
