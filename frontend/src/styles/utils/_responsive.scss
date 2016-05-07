@@ -37,14 +37,7 @@
 
             margin-top: rem-calc(20); 
         }
-    }
-    
-    // jquery dropdown plugin not used at mobile size - prefer the radio button selection
-    // make standard drop down visible - hidden for tablet and desktop
-    #standard-dropdown {
-
-        visibility: visible;  
-    }
+    }    
     
  
 } // end media query small-up
@@ -103,16 +96,6 @@
         }   
     }
     .header-register { 
-        visibility: hidden;  
-    }
-    
-    // HERO PANEL
-    // ==========
-    
-    // jquery dropdown plugin not used at mobile size - prefer the radio button selection
-    // make standard drop down visible - hidden for tablet and desktop
-    #standard-dropdown {
-
         visibility: hidden;  
     }
 
