@@ -50,15 +50,16 @@ All builds are performed by [Travis-CI](travis-ci.org) and can found [here](http
 #### Front End Developers
 - [Liliana Kastilio](https://github.com/lili2311)
 - [Rhonda Impey](https://github.com/rimpey)
+- [Icicleta Novo](https://github.com/icicleta)
 
 #### Back End Developers
 - [Tanya Powell](https://github.com/tanyapowell)
 - [Tzhe'ela Trooper](https://github.com/MsToT)
 - [Yana Bartzi](https://github.com/yanabar)
+- [Elianne Schutze](https://github.com/elischutze)
 
 #### Testers/QA
 - [Emma Short](https://github.com/EmmaGS)
-
 
 
 Notes:
