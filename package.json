@@ -31,7 +31,9 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha ./tests/*",
     "coverage": "istanbul cover node_modules/.bin/_mocha",
-    "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info"
+    "coveralls": "npm run-script coverage && node bin/coveralls.js < coverage/lcov.info",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -60,7 +62,8 @@
     "redis": "0.12.1",
     "sanitize-html": "1.11.4",
     "semver": "4.3.3",
-    "winston": "0.9.0"
+    "winston": "0.9.0",
+    "snyk": "^1.88.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.1.0",
@@ -94,5 +97,6 @@
     "pencilblue-cli": "~0.2.1",
     "bower": "~1.7.9",
     "mongodb": "~2.0.33"
-  }
+  },
+  "snyk": true
 }
